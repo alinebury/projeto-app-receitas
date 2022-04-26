@@ -13,8 +13,8 @@ class App extends React.Component {
         <RecipesProvider>
           <BrowserRouter>
             <Switch>
-              <Route path="/foods" component={ Foods } exact />
               <Route path="/" component={ Login } exact />
+              <Route path="/foods" component={ Foods } exact />
               <Route path="/*" component={ NotFound } />
             </Switch>
           </BrowserRouter>
