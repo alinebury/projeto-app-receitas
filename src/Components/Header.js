@@ -1,21 +1,55 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import profileIcon from '../images/profileIcon.svg';
+import { Link } from 'react-router-dom';
 import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../images/profileIcon.svg';
 
-function Header() {
-  const { title } = props;
-  return (
-    <>
-      <img data-testid="profile-top-btn" src={ profileIcon } alt="profile" />
-      <h3 data-testid="page-title">{title}</h3>
-      <img data-testid="search-top-btn" src={ searchIcon } alt="search" />
-    </>
-  );
+export default class Header extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      showSearchBar: false,
+    };
+  }
+
+  handleCLick = () => {
+    const { showSearchBar } = this.state;
+    this.setState({ showSearchBar: !showSearchBar });
+  }
+
+  render() {
+    const { showSearchBar } = this.state;
+    return (
+      <header>
+        <nav>
+          <button
+            type="button"
+            data-testid="search-top-btn"
+            src={ searchIcon }
+            onClick={ this.handleCLick }
+          >
+            <img
+              src={ searchIcon }
+              alt="search icon"
+            />
+          </button>
+          <h2 data-testid="page-title">Foods</h2>
+          <Link to="/profile">
+            <img
+              data-testid="profile-top-btn"
+              src={ profileIcon }
+              alt="profile icon"
+            />
+          </Link>
+        </nav>
+
+        {
+          showSearchBar && <input
+            data-testid="search-input"
+            type="search"
+            placeholder="pesquisar receita"
+          />
+        }
+      </header>
+    );
+  }
 }
-
-Header.propTypes = {
-  title: PropTypes.string.isRequired,
-};
-
-export default Header;
