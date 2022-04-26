@@ -4,6 +4,7 @@ import RecipesProvider from './Context/RecipesProvider';
 import Login from './Pages/Login';
 import Foods from './Pages/Foods';
 import NotFound from './Pages/NotFound';
+import Drinks from './Pages/Drinks';
 
 class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ class App extends React.Component {
             <Switch>
               <Route path="/" component={ Login } exact />
               <Route path="/foods" component={ Foods } exact />
+              <Route path="/drinks" component={ Drinks } exact />
               <Route path="/*" component={ NotFound } />
             </Switch>
           </BrowserRouter>
