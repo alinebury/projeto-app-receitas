@@ -1,21 +1,27 @@
 import React from 'react';
-import './App.css';
-import rockGlass from './images/rockGlass.svg';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Route, Switch, BrowserRouter } from 'react-router-dom';
+import RecipesProvider from './Context/RecipesProvider';
+import Login from './Pages/Login';
+import Foods from './Pages/Foods';
+import NotFound from './Pages/NotFound';
 
-function App() {
-  return (
-    <div className="meals">
-      <span className="logo">TRYBE</span>
-      <object
-        className="rocksGlass"
-        type="image/svg+xml"
-        data={ rockGlass }
-      >
-        Glass
-      </object>
-    </div>
-  );
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <p>Recipes App</p>
+        <RecipesProvider>
+          <BrowserRouter>
+            <Switch>
+              <Route path="/foods" component={ Foods } exact />
+              <Route path="/" component={ Login } exact />
+              <Route path="/*" component={ NotFound } />
+            </Switch>
+          </BrowserRouter>
+        </RecipesProvider>
+      </>
+    );
+  }
 }
 
 export default App;

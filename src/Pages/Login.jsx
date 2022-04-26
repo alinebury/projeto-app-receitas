@@ -1,9 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import PropTypes from 'prop-types';
+// import { Link } from 'react-router-dom';
+import RecipesContext from '../Context/RecipesContext';
 
-function Login() {
-  const [emailInput, setEmailInput] = React.useState('');
-  const [passwordInput, setPasswordInput] = React.useState('');
+function Login({ history }) {
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
+  const {
+    setEmail,
+  } = useContext(RecipesContext);
 
   const checkEmail = () => (/[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/.test(emailInput));
   const minLength = 6;
@@ -14,6 +19,8 @@ function Login() {
     localStorage.setItem('mealsToken', 1);
     localStorage.setItem('cocktailsToken', 1);
     localStorage.setItem('user', JSON.stringify(user));
+    setEmail(emailInput);
+    history.push('/foods');
   };
 
   return (
@@ -42,21 +49,27 @@ function Login() {
           onChange={ (e) => setPasswordInput(e.target.value) }
           className="input-login"
         />
-        <Link to="/comidas">
-          <button
-            type="button"
-            data-testid="login-submit-btn"
-            disabled={ !(checkEmail() && checkPass()) }
-            onClick={ handleClick }
-            className={ `entrar-btn ${!(checkEmail() && checkPass())
-              ? 'disable' : 'enable'}` }
-          >
-            Entrar
-          </button>
-        </Link>
+        {/* <Link to="/comidas"> */}
+        <button
+          type="button"
+          data-testid="login-submit-btn"
+          disabled={ !(checkEmail() && checkPass()) }
+          onClick={ handleClick }
+          className={ `entrar-btn ${!(checkEmail() && checkPass())
+            ? 'disable' : 'enable'}` }
+        >
+          Entrar
+        </button>
+        {/* </Link> */}
       </div>
     </section>
   );
 }
+
+Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+};
 
 export default Login;
