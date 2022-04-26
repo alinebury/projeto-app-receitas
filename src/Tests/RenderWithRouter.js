@@ -2,11 +2,17 @@ import React from 'react';
 import { Router } from 'react-router-dom';
 import { createMemoryHistory } from 'history';
 import { render } from '@testing-library/react';
+import RecipesProvider from '../Context/RecipesProvider';
 
 const renderWithRouter = (component) => {
   const historyMock = createMemoryHistory();
   return ({
-    ...render(<Router history={ historyMock }>{component}</Router>), history: historyMock,
+    ...render(
+      <RecipesProvider>
+        <Router history={ historyMock }>{component}</Router>
+      </RecipesProvider>,
+    ),
+    history: historyMock,
   });
 };
 
