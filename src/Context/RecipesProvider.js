@@ -6,6 +6,7 @@ function RecipesProvider({ children }) {
   const [foods, setFoods] = useState([]);
   const [drinks, setDrinks] = useState([]);
   const [email, setEmail] = useState('');
+  const [title, setTitle] = useState('');
 
   const contextValue = {
     foods,
@@ -14,6 +15,8 @@ function RecipesProvider({ children }) {
     setDrinks,
     email,
     setEmail,
+    title,
+    setTitle,
   };
 
   return (

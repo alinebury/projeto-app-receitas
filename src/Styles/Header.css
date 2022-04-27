@@ -1,11 +1,15 @@
-.footer {
+header nav {
+  align-items: center;
   align-self: center;
-  bottom: 0;
   display: flex;
   justify-content: space-around;
-  padding-bottom: 5px;
   position: fixed;
   right: 0;
   text-align: center;
+  top: 0;
   width: 100%;
+}
+
+button {
+  height: 50px;
 }

@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import Header from '../Components/Header';
 import Footer from '../Components/Footer';
+import RecipesContext from '../Context/RecipesContext';
 
-class Foods extends React.Component {
-  render() {
-    return (
-      <>
-        <Header title="Foods" />
-        <Footer />
-      </>
-    );
-  }
+function Foods() {
+  const { setTitle } = useContext(RecipesContext);
+  useEffect(() => {
+    setTitle('Foods');
+  }, []);
+
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
 }
 
 export default Foods;
