@@ -1,11 +1,11 @@
 .footer {
   align-self: center;
-  bottom: 0px;
+  bottom: 0;
   display: flex;
   justify-content: space-around;
   padding-bottom: 5px;
   position: fixed;
-  right: 0px;
+  right: 0;
   text-align: center;
   width: 100%;
 }
