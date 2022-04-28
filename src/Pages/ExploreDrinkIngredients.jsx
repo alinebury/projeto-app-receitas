@@ -3,10 +3,10 @@ import RecipesContext from '../Context/RecipesContext';
 import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 
-function ExploreDrinks() {
+function ExploreDrinkIngredients() {
   const { setTitle, setSearch } = useContext(RecipesContext);
   useEffect(() => {
-    setTitle('Explore Drinks');
+    setTitle('Explore Ingredients');
     setSearch(false);
   }, []);
 
@@ -18,4 +18,4 @@ function ExploreDrinks() {
   );
 }
 
-export default ExploreDrinks;
+export default ExploreDrinkIngredients;

@@ -6,34 +6,62 @@ import Login from './Pages/Login';
 import Foods from './Pages/Foods';
 import NotFound from './Pages/NotFound';
 import Drinks from './Pages/Drinks';
-// import ExploreDrinks from './Pages/ExploreDrink';
-// import ExploreDrinkIngredients from './Pages/ExploreDrinksIngredients';
-// import ExploreFood from './Pages/ExploreFood';
-// import ExploreFoodIngredients from './Pages/ExploreFoodIngredients';
-// import ExploreFoodNacionalities from './Pages/ExploreFoodNacionalities';
-// import Profile from './Pages/Profile';
+import FavoriteRecipes from './Pages/FavoriteRecipes';
+import DoneRecipes from './Pages/DoneRecipes';
+import Explore from './Pages/Explore';
+import ExploreDrinks from './Pages/ExploreDrink';
+import ExploreDrinkIngredients from './Pages/ExploreDrinkIngredients';
+import ExploreFood from './Pages/ExploreFood';
+import ExploreFoodIngredients from './Pages/ExploreFoodIngredients';
+import ExploreFoodNationalities from './Pages/ExploreFoodNationalities';
+import Profile from './Pages/Profile';
 
-class App extends React.Component {
-  render() {
-    return (
-      <RecipesProvider>
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" component={ Login } exact />
-            <Route path="/foods" component={ Foods } exact />
-            <Route path="/drinks" component={ Drinks } exact />
-            <Route path="/*" component={ NotFound } />
-            {/* <Route path="/explore/foods" component={ ExploreFood } exact />
-            <Route path="/explore/drinks" component={ ExploreDrinks } exact />
-            <Route path="/explore/foods/ingredients" component={ ExploreFoodIngredients } exact />
-            <Route path="/explore/drinks/ingredients" component={ ExploreDrinkIngredients } exact />
-            <Route path="/explore/foods/nacionalities" component={ ExploreFoodNacionalities } exact />
-            <Route path="/profile" component={ Profile } exact /> */}
-          </Switch>
-        </BrowserRouter>
-      </RecipesProvider>
-    );
-  }
+function App() {
+  return (
+    <RecipesProvider>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={ Login } />
+          <Route
+            exact
+            path="/explore/foods/nationalities"
+            component={ ExploreFoodNationalities }
+          />
+          <Route exact path="/foods" component={ Foods } />
+          <Route exact path="/drinks" component={ Drinks } />
+          <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
+          <Route exact path="/done-recipes" component={ DoneRecipes } />
+          <Route exact path="/explore" component={ Explore } />
+          <Route exact path="/explore/foods" component={ ExploreFood } />
+          <Route
+            exact
+            path="/explore/foods/ingredients"
+            component={ ExploreFoodIngredients }
+          />
+          <Route exact path="/explore/foods/:id" component={ ExploreFood } />
+          <Route
+            exact
+            path="/explore/foods/:id/in-progress"
+            component={ ExploreFood }
+          />
+          <Route exact path="/explore/drinks" component={ ExploreDrinks } />
+          <Route
+            exact
+            path="/explore/drinks/ingredients"
+            component={ ExploreDrinkIngredients }
+          />
+          <Route exact path="/explore/drinks/:id" component={ ExploreDrinks } />
+          <Route
+            exact
+            path="/explore/drinks/:id/in-progress"
+            component={ ExploreDrinks }
+          />
+          <Route exact path="/profile" component={ Profile } />
+          <Route exact path="/*" component={ NotFound } />
+        </Switch>
+      </BrowserRouter>
+    </RecipesProvider>
+  );
 }
 
 export default App;
