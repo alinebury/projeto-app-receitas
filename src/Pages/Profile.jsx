@@ -1,16 +1,21 @@
-// import React from 'react';
-// import Footer from '../Components/Footer';
-// import Header from '../Components/Header';
+import React, { useContext, useEffect } from 'react';
+import RecipesContext from '../Context/RecipesContext';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
-// class Profile extends React.Component {
-//   render() {
-//     return (
-//       <>
-//         <Header title="Profile" />
-//         <Footer />
-//       </>
-//     );
-//   }
-// }
+function Profile() {
+  const { setTitle, setSearch } = useContext(RecipesContext);
+  useEffect(() => {
+    setTitle('Profile');
+    setSearch(false);
+  }, []);
 
-// export default Profile;
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
+}
+
+export default Profile;

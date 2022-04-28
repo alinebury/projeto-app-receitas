@@ -6,23 +6,23 @@ import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 
 function Header() {
-  const { title } = useContext(RecipesContext);
+  const { title, search } = useContext(RecipesContext);
   const [showSearchBar, setShowSearchBar] = useState(false);
-
   return (
     <header>
       <nav>
-        <button
-          type="button"
-          data-testid="search-top-btn"
-          src={ searchIcon }
-          onClick={ () => setShowSearchBar((prevState) => !prevState) }
-        >
-          <img
+        { search && (
+          <button
+            type="button"
+            data-testid="search-top-btn"
             src={ searchIcon }
-            alt="search icon"
-          />
-        </button>
+            onClick={ () => setShowSearchBar((prevState) => !prevState) }
+          >
+            <img
+              // src={ searchIcon }
+              alt="search icon"
+            />
+          </button>) }
         <h2 data-testid="page-title">{ title }</h2>
         <Link to="/profile">
           <img

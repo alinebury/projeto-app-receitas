@@ -1,16 +1,21 @@
-// import React from 'react';
-// import Footer from '../Components/Footer';
-// import Header from '../Components/Header';
+import React, { useContext, useEffect } from 'react';
+import RecipesContext from '../Context/RecipesContext';
+import Footer from '../Components/Footer';
+import Header from '../Components/Header';
 
-// class ExploreFood extends React.Component {
-//   render() {
-//     return (
-//       <>
-//         <Header title="ExploreFood" />
-//         <Footer />
-//       </>
-//     );
-//   }
-// }
+function ExploreFood() {
+  const { setTitle, setSearch } = useContext(RecipesContext);
+  useEffect(() => {
+    setTitle('Explore Foods');
+    setSearch(false);
+  }, []);
 
-// export default ExploreFood;
+  return (
+    <>
+      <Header />
+      <Footer />
+    </>
+  );
+}
+
+export default ExploreFood;
