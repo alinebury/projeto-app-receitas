@@ -14,7 +14,7 @@ function Header() {
           <button
             type="button"
             data-testid="search-top-btn"
-            // src={ searchIcon }
+            src={ searchIcon }
             onClick={ () => setShowSearchBar((prevState) => !prevState) }
           >
             <img

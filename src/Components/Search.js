@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
 import { fetchFoodsSearch } from '../Api/foodsAPI';
 import { fetchDrinksSearch } from '../Api/drinksAPI';
 
 function Search() {
-  const { showSearchBar, title, setSearchAPI, search } = useContext(RecipesContext);
+  const history = useHistory();
+  const {
+    showSearchBar, title, setSearchAPI, search } = useContext(RecipesContext);
   const [radioAPI, setRadioAPI] = useState({
     search: '',
     searchRadio: '',
@@ -16,21 +19,35 @@ function Search() {
       [name]: value,
     }));
   };
+  const redirectResult = (result) => {
+    if (result.length === 1 && result[0].idMeal) {
+      history.push(`/foods/${result[0].idMeal}`);
+    } else if (result.length === 1 && result[0].idDrink) {
+      history.push(`/drinks/${result[0].idDrink}`);
+    } else if (result.length === 0) {
+      global.alert('Sorry, we haven\'t found any recipes for these filters.');
+    }
+  };
 
   const buttonSearch = async () => {
     if (radioAPI.searchRadio === 'f' && radioAPI.search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
-    } else
-    if (title === 'Foods') {
-      setSearchAPI(await fetchFoodsSearch(radioAPI));
     } else {
-      setSearchAPI(await fetchDrinksSearch(radioAPI));
+      let result;
+      if (title === 'Foods') {
+        result = await fetchFoodsSearch(radioAPI);
+        setSearchAPI(result);
+      } else {
+        result = await fetchDrinksSearch(radioAPI);
+        setSearchAPI(result);
+      }
+      redirectResult(result);
     }
   };
 
   return (
     showSearchBar && search && (
-      <div className="search-bar">
+      <section className="search-bar">
         <input
           data-testid="search-input"
           type="search"
@@ -38,6 +55,8 @@ function Search() {
           name="search"
           onChange={ handleClick }
         />
+        <br />
+        {/* mago do css resolva isso aq */}
         <label htmlFor="ingredient-search-radio">
           <input
             type="radio"
@@ -71,7 +90,6 @@ function Search() {
           />
           First Letter
         </label>
-
         <button
           type="button"
           data-testid="exec-search-btn"
@@ -79,7 +97,7 @@ function Search() {
         >
           Buscar
         </button>
-      </div>
+      </section>
     )
   );
 }
