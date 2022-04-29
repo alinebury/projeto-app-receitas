@@ -8,6 +8,8 @@ function RecipesProvider({ children }) {
   const [email, setEmail] = useState('');
   const [title, setTitle] = useState('');
   const [search, setSearch] = useState(true);
+  const [showSearchBar, setShowSearchBar] = useState(false);
+  const [searchAPI, setSearchAPI] = useState([]);
 
   const contextValue = {
     foods,
@@ -20,6 +22,10 @@ function RecipesProvider({ children }) {
     setTitle,
     search,
     setSearch,
+    showSearchBar,
+    setShowSearchBar,
+    searchAPI,
+    setSearchAPI,
   };
 
   return (
