@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
 import '../Styles/Header.css';
@@ -6,8 +6,7 @@ import searchIcon from '../images/searchIcon.svg';
 import profileIcon from '../images/profileIcon.svg';
 
 function Header() {
-  const { title, search } = useContext(RecipesContext);
-  const [showSearchBar, setShowSearchBar] = useState(false);
+  const { title, search, setShowSearchBar } = useContext(RecipesContext);
   return (
     <header>
       <nav>
@@ -15,11 +14,11 @@ function Header() {
           <button
             type="button"
             data-testid="search-top-btn"
-            src={ searchIcon }
+            // src={ searchIcon }
             onClick={ () => setShowSearchBar((prevState) => !prevState) }
           >
             <img
-              // src={ searchIcon }
+              src={ searchIcon }
               alt="search icon"
             />
           </button>) }
@@ -32,14 +31,6 @@ function Header() {
           />
         </Link>
       </nav>
-
-      {
-        showSearchBar && <input
-          data-testid="search-input"
-          type="search"
-          placeholder="pesquisar receita"
-        />
-      }
     </header>
   );
 }

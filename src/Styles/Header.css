@@ -3,10 +3,8 @@ header nav {
   align-self: center;
   display: flex;
   justify-content: space-around;
-  position: fixed;
   right: 0;
   text-align: center;
-  top: 0;
   width: 100%;
 }
 
