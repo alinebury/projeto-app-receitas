@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
+import { fetchFoods } from '../Api/foodsAPI';
+import { fetchDrinks } from '../Api/drinksAPI';
 
 function RecipesProvider({ children }) {
   const [foods, setFoods] = useState([]);
@@ -10,6 +12,16 @@ function RecipesProvider({ children }) {
   const [search, setSearch] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
   const [searchAPI, setSearchAPI] = useState([]);
+
+  async function getSearch(type) {
+    let resultAPI;
+    if (type === 'Foods') {
+      resultAPI = await fetchFoods();
+    } else {
+      resultAPI = await fetchDrinks();
+    }
+    setSearchAPI(resultAPI);
+  }
 
   const contextValue = {
     foods,
@@ -26,6 +38,7 @@ function RecipesProvider({ children }) {
     setShowSearchBar,
     searchAPI,
     setSearchAPI,
+    getSearch,
   };
 
   return (

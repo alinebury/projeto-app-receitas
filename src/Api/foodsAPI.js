@@ -1,9 +1,9 @@
-const ENDPOINT = 'https://www.themealdb.com/api.php';
+const ENDPOINT = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 export async function fetchFoods() {
   const response = await fetch(ENDPOINT);
   const result = await response.json();
-  return result.results;
+  return result.meals ? result.meals : [];
 }
 
 export async function fetchFoodsSearch({ search, searchRadio }) {

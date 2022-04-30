@@ -6,9 +6,11 @@ import Search from '../Components/Search';
 import RecipesList from '../Components/RecipesList';
 
 function Foods() {
-  const { setTitle } = useContext(RecipesContext);
+  const { setTitle, setShowSearchBar, getSearch } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Foods');
+    getSearch('Foods');
+    setShowSearchBar(false);
   }, []);
 
   return (

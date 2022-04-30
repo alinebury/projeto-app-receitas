@@ -1,9 +1,13 @@
-const ENDPOINT = 'https://www.thecocktaildb.com/api.php';
+const ENDPOINT = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 
 export async function fetchDrinks() {
-  const response = await fetch(ENDPOINT);
-  const result = await response.json();
-  return result.results;
+  try {
+    const response = await fetch(ENDPOINT);
+    const result = await response.json();
+    return result.drinks ? result.drinks : [];
+  } catch (error) {
+    return [];
+  }
 }
 
 export async function fetchDrinksSearch({ search, searchRadio }) {
