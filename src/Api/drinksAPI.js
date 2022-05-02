@@ -16,3 +16,15 @@ export async function fetchDrinksSearch({ search, searchRadio }) {
     return [];
   }
 }
+
+export async function fetchRecipeDrink(id) {
+  const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+  const result = await response.json();
+  return result.drinks;
+}
+
+export async function fetchRecommendationDrink() {
+  const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
+  const result = await response.json();
+  return result.drinks;
+}

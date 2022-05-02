@@ -2,15 +2,17 @@ import React from 'react';
 import '../Styles/CardRecipe.css';
 
 function CardRecipe(prop) {
-  console.log(prop);
-  const { index, recipe } = prop;
+  // console.log(prop);
+  const { index, recipe, testid } = prop;
   const type = recipe.idMeal ? 'Meal' : 'Drink';
+  const testIdName = testid
+    .includes('recomendation-card') ? '-recomendation-title' : '-card-name';
   return (
     <div
-      data-testid={ `${index}-recipe-card` }
+      data-testid={ testid }
     >
       <p
-        data-testid={ `${index}-card-name` }
+        data-testid={ `${index}${testIdName}` }
       >
         { recipe[`str${type}`] }
       </p>
