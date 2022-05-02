@@ -11,7 +11,8 @@ function RecipesProvider({ children }) {
   const [title, setTitle] = useState('');
   const [search, setSearch] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [searchAPI, setSearchAPI] = useState([]);
+  const [recipesAPI, setRecipesAPI] = useState([]);
+  const [categoriesAPI, setCategoriesAPI] = useState([]);
 
   async function getSearch(type) {
     let resultAPI;
@@ -20,7 +21,7 @@ function RecipesProvider({ children }) {
     } else {
       resultAPI = await fetchDrinks();
     }
-    setSearchAPI(resultAPI);
+    setRecipesAPI(resultAPI);
   }
 
   const contextValue = {
@@ -36,9 +37,11 @@ function RecipesProvider({ children }) {
     setSearch,
     showSearchBar,
     setShowSearchBar,
-    searchAPI,
-    setSearchAPI,
+    recipesAPI,
+    setRecipesAPI,
     getSearch,
+    categoriesAPI,
+    setCategoriesAPI,
   };
 
   return (
