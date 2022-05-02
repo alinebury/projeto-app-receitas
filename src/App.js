@@ -4,6 +4,7 @@ import './Styles/Body.css';
 import RecipesProvider from './Context/RecipesProvider';
 import Login from './Pages/Login';
 import Foods from './Pages/Foods';
+import DetailRecipes from './Pages/DetailRecipes';
 import NotFound from './Pages/NotFound';
 import Drinks from './Pages/Drinks';
 import FavoriteRecipes from './Pages/FavoriteRecipes';
@@ -29,8 +30,8 @@ function App() {
           />
           <Route exact path="/foods" component={ Foods } />
           <Route exact path="/drinks" component={ Drinks } />
-          <Route exact path="/foods/:id" component={ NotFound } />
-          <Route exact path="/drinks/:id" component={ NotFound } />
+          <Route exact path="/foods/:id" component={ DetailRecipes } />
+          <Route exact path="/drinks/:id" component={ DetailRecipes } />
           <Route exact path="/favorite-recipes" component={ FavoriteRecipes } />
           <Route exact path="/done-recipes" component={ DoneRecipes } />
           <Route exact path="/explore" component={ Explore } />
