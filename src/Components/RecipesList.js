@@ -3,13 +3,13 @@ import RecipesContext from '../Context/RecipesContext';
 import CardRecipe from './CardRecipe';
 
 function RecipesList() {
-  const { searchAPI } = useContext(RecipesContext);
+  const { recipesAPI } = useContext(RecipesContext);
   const MAXRECIPES = 12;
 
   return (
-    searchAPI.length > 1 && (
+    recipesAPI.length > 1 && (
       <article>
-        { searchAPI.slice(0, MAXRECIPES)
+        { recipesAPI.slice(0, MAXRECIPES)
           .map((item, index) => (
             <CardRecipe
               key={ index }
