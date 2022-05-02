@@ -13,6 +13,7 @@ function RecipesList() {
           .map((item, index) => (
             <CardRecipe
               key={ index }
+              testid={ `${index}-recipe-card` }
               index={ index }
               recipe={ item }
             />)) }
