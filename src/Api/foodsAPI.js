@@ -32,14 +32,22 @@ export async function fetchFoodsCategories() {
   }
 }
 
-export async function fetchRecipeFood(id) {
-  const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
-  const result = await response.json();
-  return result.meals;
+export async function fetchOneFoodRecipe(id) {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`);
+    const result = await response.json();
+    return result.meals ? result.meals : [];
+  } catch (error) {
+    return [];
+  }
 }
 
-export async function fetchRecommendationFood() {
-  const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
-  const result = await response.json();
-  return result.meals;
+export async function fetchFoodRecommendation() {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    const result = await response.json();
+    return result.meals ? result.meals : [];
+  } catch (error) {
+    return [];
+  }
 }

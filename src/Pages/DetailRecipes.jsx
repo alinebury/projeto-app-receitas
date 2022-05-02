@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { fetchRecipeFood, fetchRecommendationFood } from '../Api/foodsAPI';
-import { fetchRecipeDrink, fetchRecommendationDrink } from '../Api/drinksAPI';
+import { fetchOneFoodRecipe, fetchFoodRecommendation } from '../Api/foodsAPI';
+import { fetchOneDrinkRecipe, fetchDrinkRecommendation } from '../Api/drinksAPI';
 import Recommendations from '../Components/RecomendationsList';
 import '../Styles/DetailRecipes.css';
 
@@ -17,13 +17,13 @@ function DetailRecipes(props) {
   const isFood = url.includes('foods'); // mudar
   const fecthAPIRecipe = isFood ? (
     async () => {
-      setRecipe(await fetchRecipeFood(id));
-      setRecommendation(await fetchRecommendationDrink());
+      setRecipe(await fetchOneFoodRecipe(id));
+      setRecommendation(await fetchDrinkRecommendation());
     }
   ) : (
     async () => {
-      setRecipe(await fetchRecipeDrink(id));
-      setRecommendation(await fetchRecommendationFood());
+      setRecipe(await fetchOneDrinkRecipe(id));
+      setRecommendation(await fetchFoodRecommendation());
     }
   );
   // id food = 52771

@@ -30,7 +30,9 @@ export async function fetchDrinksCategories() {
   } catch (error) {
     return [];
   }
-export async function fetchRecipeDrink(id) {
+}
+
+export async function fetchOneDrinkRecipe(id) {
   try {
     const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
     const result = await response.json();
@@ -40,7 +42,7 @@ export async function fetchRecipeDrink(id) {
   }
 }
 
-export async function fetchRecommendationDrink() {
+export async function fetchDrinkRecommendation() {
   try {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=');
     const result = await response.json();
