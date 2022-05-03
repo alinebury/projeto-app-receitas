@@ -1,0 +1,6 @@
+.carousel {
+  display: flex;
+  overflow-x: auto;
+  width: 360px;
+};
+  

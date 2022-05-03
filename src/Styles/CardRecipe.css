@@ -1,3 +1,9 @@
 .cardImage {
-  width: 100px;
-}
+  display: flex;
+  justify-content: space-around;
+  width: 150px;
+};
+
+.card {
+  margin: 15px;
+};
