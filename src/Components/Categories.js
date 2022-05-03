@@ -1,19 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from '../Context/RecipesContext';
-import { fetchFoodsCategories, fetchFoodsFilterToCategory } from '../Api/foodsAPI';
-import { fetchDrinksCategories, fetchDrinksFilterToCategory } from '../Api/drinksAPI';
+import { fetchFoodsFilterToCategory } from '../Api/foodsAPI';
+import { fetchDrinksFilterToCategory } from '../Api/drinksAPI';
 
 const MAXCATEGORIES = 5;
 
 function Categories(props) {
   const { type } = props;
-  const { categoriesAPI, setCategoriesAPI,
+  const { categoriesAPI,
     recipesAPI, setRecipes,
     categories, setCategories } = useContext(RecipesContext);
-  const fetchCategories = type === 'foods'
-    ? async () => setCategoriesAPI(await fetchFoodsCategories())
-    : async () => setCategoriesAPI(await fetchDrinksCategories());
 
   const fetchFilterCategory = type === 'foods'
     ? async () => setRecipes(await fetchFoodsFilterToCategory(categories))
@@ -37,10 +34,6 @@ function Categories(props) {
       </button>
     );
   }
-
-  useEffect(() => {
-    fetchCategories();
-  }, []);
 
   useEffect(() => {
     if (categories !== '') {

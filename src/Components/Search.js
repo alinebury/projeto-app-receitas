@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
-import { fetchFoodsRecipes, fetchFoodsCategories } from '../Api/foodsAPI';
-import { fetchDrinksRecipes, fetchDrinksCategories } from '../Api/drinksAPI';
+import { fetchFoodsRecipes } from '../Api/foodsAPI';
+import { fetchDrinksRecipes } from '../Api/drinksAPI';
 
 function Search() {
   const history = useHistory();
@@ -36,11 +36,10 @@ function Search() {
       let resultRecipes;
       if (title === 'Foods') { // otimizar o código com base no Categories.js
         resultRecipes = await fetchFoodsRecipes(radioAPI);
-        resultCategories = await fetchFoodsCategories();
         setRecipes(resultRecipes);
       } else {
         resultRecipes = await fetchDrinksRecipes(radioAPI);
-        resultCategories = await fetchDrinksCategories();
+        console.log(resultRecipes);
         setRecipes(resultRecipes);
       }
       redirectResult(resultRecipes);
