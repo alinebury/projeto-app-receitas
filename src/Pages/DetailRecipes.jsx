@@ -4,19 +4,30 @@ import PropTypes from 'prop-types';
 import { fetchOneFoodRecipe, fetchFoodRecommendation } from '../Api/foodsAPI';
 import { fetchOneDrinkRecipe, fetchDrinkRecommendation } from '../Api/drinksAPI';
 import Recommendations from '../Components/RecomendationsList';
-import shareIcon from '../images/shareIcon.svg';
-import whiteHeartIcon from '../images/whiteHeartIcon.svg';
-import blackHeartIcon from '../images/blackHeartIcon.svg';
+import ButtonsOfDetails from '../Components/ButtonsOfDetails';
 import '../Styles/DetailRecipes.css';
+
+function objOfRecipe(recipe, id, isFood) {
+  return ({
+    id,
+    type: isFood ? 'food' : 'drink',
+    nationality: recipe[0].strArea || '',
+    category: recipe[0].strCategory || '',
+    alcoholicOrNot: recipe[0].strAlcoholic || '',
+    name: isFood ? recipe[0].strMeal : recipe[0].strDrink,
+    image: isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb,
+  });
+}
 
 function DetailRecipes(props) {
   const history = useHistory();
-  const { match: { url, params: { id } }, match } = props;
+  const { match: { url, params: { id } } } = props;
   const [recipe, setRecipe] = useState([]);
+  const [objRecipe, setObjRecipe] = useState({});
   const [recommendation, setRecommendation] = useState([]);
   const [ingredient, setIgredient] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
-  const [isFavorite, setIsFavorite] = useState(false);
+  const [inProgressRecipes, setInProgressRecipes] = useState();
   const isFood = url.includes('foods'); // mudar
   const fecthAPIRecipe = isFood ? (
     async () => {
@@ -34,20 +45,12 @@ function DetailRecipes(props) {
 
   useEffect(() => {
     fecthAPIRecipe();
-    const inProgressRecipes = JSON.parse(localStorage
-      .getItem('inProgressRecipes') || '{}');
-    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
+    setInProgressRecipes(JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || '{ cocktails: {}, meals: {}}');
     console.log(inProgressRecipes);
-    // console.log(favoriteRecipes);
+    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-  // console.log(recipe);
-
-  useEffect(() => {
-    // console.log(favoriteRecipes);
-    setIsFavorite(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
-    console.log(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
-  }, [id, favoriteRecipes]);
 
   useEffect(() => {
     if (recipe.length > 0) {
@@ -56,26 +59,15 @@ function DetailRecipes(props) {
         .map((ingre) => recipe[0][ingre])
         .filter((ing) => ing != null && ing !== '');
       setIgredient(ingredients);
-    }
-  }, [recipe]);
 
-  const buttonFavorite = () => {
-    setIsFavorite((prev) => !prev);
-    const listFavorites = [...favoriteRecipes, {
-      id,
-      type: isFood ? 'food' : 'drinks',
-      nationality: recipe[0].strArea || '',
-      category: recipe[0].strCategory || '',
-      alcoholicOrNot: recipe[0].strAlcoholic || '',
-      name: isFood ? recipe[0].strMeal : recipe[0].strDrink,
-      image: isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb,
-    }];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorites));
-  };
+      setObjRecipe(objOfRecipe(recipe, id, isFood));
+    }
+  }, [id, isFood, recipe]);
 
   const buttonStarRecipe = () => {
+    // const newInProgress = { ...}
+    // localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgress));
     history.push(`${url}/in-progress`);
-    console.log(match);
   };
 
   return (
@@ -85,32 +77,19 @@ function DetailRecipes(props) {
           <img
             width="100%"
             data-testid="recipe-photo"
-            src={
-              isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb
-            }
-            alt={ isFood ? recipe[0].strMeal : recipe[0].strDrink }
+            src={ objRecipe.image }
+            alt={ objRecipe.name }
           />
           <h2 data-testid="recipe-title">
-            { isFood ? recipe[0].strMeal : recipe[0].strDrink }
+            { objRecipe.name }
           </h2>
 
-          <button
-            type="button"
-            data-testid="share-btn"
-            onClick={ () => navigator.clipboard.writeText(url) }
-          >
-            <img src={ shareIcon } alt="shareIcon" />
-          </button>
-          <button
-            type="button"
-            data-testid="favorite-btn"
-            onClick={ buttonFavorite }
-          >
-            <img
-              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
-              alt="favoriteIcon"
-            />
-          </button>
+          <ButtonsOfDetails
+            objRecipe={ objRecipe }
+            favoriteRecipes={ favoriteRecipes }
+            id={ id }
+            url={ url }
+          />
 
           <h3 data-testid="recipe-category">
             { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
