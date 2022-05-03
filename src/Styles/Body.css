@@ -30,21 +30,18 @@ body {
 }
 
 .title {
-  animation: initTitle 0.6s;
   font-style: italic;
   position: absolute;
   top: 30px;
 }
 
 .login-text {
-  animation: initLogin 1.5s;
   bottom: 230px;
   font-size: 1.5rem;
   position: absolute;
 }
 
 .input-login {
-  animation: initLogin 1.5s;
   background: none;
   border: none;
   border-bottom: 2px solid rgb(224, 224, 224);
@@ -62,7 +59,6 @@ body {
 }
 
 .entrar-btn, .finish-btn {
-  animation: initLogin 1.5s;
   background: rgb(48, 48, 48);
   border: none;
   border-radius: 5px;
