@@ -1,13 +1,13 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
-import { fetchFoodsSearch } from '../Api/foodsAPI';
-import { fetchDrinksSearch } from '../Api/drinksAPI';
+import { fetchFoodsRecipes } from '../Api/foodsAPI';
+import { fetchDrinksRecipes } from '../Api/drinksAPI';
 
 function Search() {
   const history = useHistory();
   const {
-    showSearchBar, title, setSearchAPI, search } = useContext(RecipesContext);
+    showSearchBar, title, setRecipes, search } = useContext(RecipesContext);
   const [radioAPI, setRadioAPI] = useState({
     search: '',
     searchRadio: '',
@@ -33,15 +33,16 @@ function Search() {
     if (radioAPI.searchRadio === 'f' && radioAPI.search.length > 1) {
       global.alert('Your search must have only 1 (one) character');
     } else {
-      let result;
-      if (title === 'Foods') {
-        result = await fetchFoodsSearch(radioAPI);
-        setSearchAPI(result);
+      let resultRecipes;
+      if (title === 'Foods') { // otimizar o código com base no Categories.js
+        resultRecipes = await fetchFoodsRecipes(radioAPI);
+        setRecipes(resultRecipes);
       } else {
-        result = await fetchDrinksSearch(radioAPI);
-        setSearchAPI(result);
+        resultRecipes = await fetchDrinksRecipes(radioAPI);
+        console.log(resultRecipes);
+        setRecipes(resultRecipes);
       }
-      redirectResult(result);
+      redirectResult(resultRecipes);
     }
   };
 

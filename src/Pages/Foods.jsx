@@ -4,17 +4,21 @@ import Footer from '../Components/Footer';
 import RecipesContext from '../Context/RecipesContext';
 import Search from '../Components/Search';
 import RecipesList from '../Components/RecipesList';
+import Categories from '../Components/Categories';
 
 function Foods() {
-  const { setTitle } = useContext(RecipesContext);
+  const { setTitle, setShowSearchBar, getSearch } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Foods');
+    getSearch('Foods');
+    setShowSearchBar(false);
   }, []);
 
   return (
     <>
       <Header />
       <Search />
+      <Categories type="foods" />
       <RecipesList />
       <Footer />
     </>

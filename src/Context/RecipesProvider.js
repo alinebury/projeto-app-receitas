@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import RecipesContext from './RecipesContext';
+import { fetchFoods, fetchFoodsCategories } from '../Api/foodsAPI';
+import { fetchDrinks, fetchDrinksCategories } from '../Api/drinksAPI';
 
 function RecipesProvider({ children }) {
   const [foods, setFoods] = useState([]);
@@ -9,7 +11,25 @@ function RecipesProvider({ children }) {
   const [title, setTitle] = useState('');
   const [search, setSearch] = useState(true);
   const [showSearchBar, setShowSearchBar] = useState(false);
-  const [searchAPI, setSearchAPI] = useState([]);
+  const [recipesAPI, setRecipesAPI] = useState([]);
+  const [recipes, setRecipes] = useState([]);
+  const [categoriesAPI, setCategoriesAPI] = useState([]);
+  const [categories, setCategories] = useState('');
+
+  async function getSearch(type) {
+    let resulRecipestAPI;
+    let resultCategoriesAPI;
+    if (type === 'Foods') {
+      resulRecipestAPI = await fetchFoods();
+      resultCategoriesAPI = await fetchFoodsCategories();
+    } else {
+      resulRecipestAPI = await fetchDrinks();
+      resultCategoriesAPI = await fetchDrinksCategories();
+    }
+    setRecipesAPI(resulRecipestAPI);
+    setRecipes(resulRecipestAPI);
+    setCategoriesAPI(resultCategoriesAPI);
+  }
 
   const contextValue = {
     foods,
@@ -24,8 +44,15 @@ function RecipesProvider({ children }) {
     setSearch,
     showSearchBar,
     setShowSearchBar,
-    searchAPI,
-    setSearchAPI,
+    recipesAPI,
+    setRecipesAPI,
+    getSearch,
+    categoriesAPI,
+    setCategoriesAPI,
+    categories,
+    setCategories,
+    recipes,
+    setRecipes,
   };
 
   return (

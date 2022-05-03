@@ -1,28 +1,31 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/CardRecipe.css';
 
 function CardRecipe(prop) {
-  // console.log(prop);
   const { index, recipe, testid } = prop;
   const type = recipe.idMeal ? 'Meal' : 'Drink';
+  const link = type === 'Meal' ? `/foods/${recipe.idMeal}` : `/drinks/${recipe.idDrink}`;
   const testIdName = testid
     .includes('recomendation-card') ? '-recomendation-title' : '-card-name';
   return (
-    <div
-      data-testid={ testid }
-    >
-      <p
-        data-testid={ `${index}${testIdName}` }
+    <Link to={ link }>
+      <div
+        data-testid={ testid }
       >
-        { recipe[`str${type}`] }
-      </p>
-      <img
-        data-testid={ `${index}-card-img` }
-        src={ recipe[`str${type}Thumb`] }
-        alt={ recipe[`str${type}`] }
-        className="cardImage"
-      />
-    </div>
+        <p
+          data-testid={ `${index}${testIdName}` }
+        >
+          { recipe[`str${type}`] }
+        </p>
+        <img
+          data-testid={ `${index}-card-img` }
+          src={ recipe[`str${type}Thumb`] }
+          alt={ recipe[`str${type}`] }
+          className="cardImage"
+        />
+      </div>
+    </Link>
   );
 }
 
