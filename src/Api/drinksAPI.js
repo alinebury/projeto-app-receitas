@@ -25,6 +25,16 @@ export async function fetchDrinksCategories() {
   try {
     const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list');
     const result = await response.json();
+    return result.drinks ? result.drinks : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function fetchDrinksFilterToCategory(category) {
+  try {
+    const response = await fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${category}`);
+    const result = await response.json();
     console.log(result);
     return result.drinks ? result.drinks : [];
   } catch (error) {
