@@ -11,6 +11,7 @@ function CardRecipe(prop) {
   return (
     <Link to={ link }>
       <div
+        className="card"
         data-testid={ testid }
       >
         <p

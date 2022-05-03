@@ -1,9 +1,11 @@
 .cardImage {
   display: flex;
   justify-content: space-around;
+  margin: 20px;
   width: 150px;
 };
 
-.card {
+/* .card {
+  background-color: black;
   margin: 15px;
-};
+}; */
