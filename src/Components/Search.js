@@ -7,8 +7,7 @@ import { fetchDrinksRecipes, fetchDrinksCategories } from '../Api/drinksAPI';
 function Search() {
   const history = useHistory();
   const {
-    showSearchBar, title, setRecipesAPI, search,
-    setCategoriesAPI } = useContext(RecipesContext);
+    showSearchBar, title, setRecipes, search } = useContext(RecipesContext);
   const [radioAPI, setRadioAPI] = useState({
     search: '',
     searchRadio: '',
@@ -35,17 +34,14 @@ function Search() {
       global.alert('Your search must have only 1 (one) character');
     } else {
       let resultRecipes;
-      let resultCategories;
-      if (title === 'Foods') {
+      if (title === 'Foods') { // otimizar o código com base no Categories.js
         resultRecipes = await fetchFoodsRecipes(radioAPI);
         resultCategories = await fetchFoodsCategories();
-        setRecipesAPI(resultRecipes);
-        setCategoriesAPI(resultCategories);
+        setRecipes(resultRecipes);
       } else {
         resultRecipes = await fetchDrinksRecipes(radioAPI);
         resultCategories = await fetchDrinksCategories();
-        setRecipesAPI(resultRecipes);
-        setCategoriesAPI(resultCategories);
+        setRecipes(resultRecipes);
       }
       redirectResult(resultRecipes);
     }
