@@ -4,16 +4,21 @@ import PropTypes from 'prop-types';
 import { fetchOneFoodRecipe, fetchFoodRecommendation } from '../Api/foodsAPI';
 import { fetchOneDrinkRecipe, fetchDrinkRecommendation } from '../Api/drinksAPI';
 import Recommendations from '../Components/RecomendationsList';
+import shareIcon from '../images/shareIcon.svg';
+import whiteHeartIcon from '../images/whiteHeartIcon.svg';
+import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../Styles/DetailRecipes.css';
 
 // const NUMBER_SIX = 6;
 
 function DetailRecipes(props) {
   const history = useHistory();
-  const { match: { url, params: { id } } } = props;
+  const { match: { url, params: { id } }, match } = props;
   const [recipe, setRecipe] = useState([]);
   const [recommendation, setRecommendation] = useState([]);
   const [ingredient, setIgredient] = useState([]);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [isFavorite, setIsFavorite] = useState(false);
   const isFood = url.includes('foods'); // mudar
   const fecthAPIRecipe = isFood ? (
     async () => {
@@ -26,13 +31,25 @@ function DetailRecipes(props) {
       setRecommendation(await fetchFoodRecommendation());
     }
   );
-  // id food = 52771
-  // id drink = 178319
+  // id food test = 52771
+  // id drink test = 178319
 
   useEffect(() => {
     fecthAPIRecipe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const inProgressRecipes = JSON.parse(localStorage
+      .getItem('inProgressRecipes') || '{}');
+    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
+    console.log(inProgressRecipes);
+    // console.log(favoriteRecipes);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  // console.log(recipe);
+
+  useEffect(() => {
+    // console.log(favoriteRecipes);
+    setIsFavorite(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
+    console.log(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
+  }, [id, favoriteRecipes]);
 
   useEffect(() => {
     if (recipe.length > 0) {
@@ -44,13 +61,28 @@ function DetailRecipes(props) {
     }
   }, [recipe]);
 
-  // console.log(recommendation);
-  // console.log(ingredient);
-  // console.log(recommendation.slice(0, NUMBER_SIX));
+  const buttonFavorite = () => {
+    setIsFavorite((prev) => !prev);
+    const listFavorites = [...favoriteRecipes, {
+      id,
+      type: isFood ? 'food' : 'drinks',
+      nationality: recipe[0].strArea || '',
+      category: recipe[0].strCategory || '',
+      alcoholicOrNot: recipe[0].strAlcoholic || '',
+      name: isFood ? recipe[0].strMeal : recipe[0].strDrink,
+      image: isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb,
+    }];
+    localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorites));
+  };
+
+  const buttonStarRecipe = () => {
+    history.push(`${url}/in-progress`);
+    console.log(match);
+  };
 
   return (
     <div>
-      { recipe.length === 0 ? <p>Carregando...</p> : (
+      { recipe.length !== 0 && (
         <>
           <img
             width="100%"
@@ -63,8 +95,25 @@ function DetailRecipes(props) {
           <h2 data-testid="recipe-title">
             { isFood ? recipe[0].strMeal : recipe[0].strDrink }
           </h2>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
+
+          <button
+            type="button"
+            data-testid="share-btn"
+            onClick={ () => navigator.clipboard.writeText(url) }
+          >
+            <img src={ shareIcon } alt="shareIcon" />
+          </button>
+          <button
+            type="button"
+            data-testid="favorite-btn"
+            onClick={ buttonFavorite }
+          >
+            <img
+              src={ isFavorite ? blackHeartIcon : whiteHeartIcon }
+              alt="favoriteIcon"
+            />
+          </button>
+
           <h3 data-testid="recipe-category">
             { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
           </h3>
@@ -89,7 +138,7 @@ function DetailRecipes(props) {
             className="btnStartRecipe"
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => history.push(`${url}/in-progress`) }
+            onClick={ buttonStarRecipe }
           >
             Star Recipe
           </button>

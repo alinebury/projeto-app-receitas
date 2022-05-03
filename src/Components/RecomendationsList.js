@@ -5,7 +5,7 @@ const NUMBER_SIX = 6;
 
 function Recommendations(props) {
   const { recommendation } = props;
-  console.log(recommendation);
+  // console.log(recommendation);
   return (
     recommendation.length > 0 && recommendation.slice(0, NUMBER_SIX)
       .map((recom, index) => (
