@@ -1,6 +1,7 @@
 header nav {
   align-items: center;
   align-self: center;
+  background: rgb(34, 34, 34);
   display: flex;
   justify-content: space-around;
   right: 0;
@@ -10,4 +11,10 @@ header nav {
 
 button {
   height: 50px;
+}
+
+.profile {
+  background-color: white;
+  padding: 3px;
+  width: 40px;
 }

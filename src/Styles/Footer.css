@@ -1,11 +1,12 @@
-.footer {
-  align-self: center;
+footer {
+  align-items: center;
+  background: rgb(34, 34, 34);
   bottom: 0;
   display: flex;
+  height: 50px;
   justify-content: space-around;
-  padding-bottom: 5px;
+  left: 0;
   position: fixed;
-  right: 0;
-  text-align: center;
   width: 100%;
+  z-index: 999;
 }
