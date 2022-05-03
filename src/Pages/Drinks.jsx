@@ -4,6 +4,7 @@ import Footer from '../Components/Footer';
 import Header from '../Components/Header';
 import Search from '../Components/Search';
 import RecipesList from '../Components/RecipesList';
+import Categories from '../Components/Categories';
 
 function Drinks() {
   const { setTitle, setShowSearchBar, getSearch } = useContext(RecipesContext);
@@ -17,6 +18,7 @@ function Drinks() {
     <>
       <Header />
       <Search />
+      <Categories type="drinks" />
       <RecipesList />
       <Footer />
     </>
