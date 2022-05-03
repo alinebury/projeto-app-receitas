@@ -9,8 +9,6 @@ import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 import '../Styles/DetailRecipes.css';
 
-// const NUMBER_SIX = 6;
-
 function DetailRecipes(props) {
   const history = useHistory();
   const { match: { url, params: { id } }, match } = props;
