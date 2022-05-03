@@ -3,20 +3,19 @@ import RecipesContext from '../Context/RecipesContext';
 import CardRecipe from './CardRecipe';
 
 function RecipesList() {
-  const { recipesAPI } = useContext(RecipesContext);
+  const { recipes } = useContext(RecipesContext);
   const MAXRECIPES = 12;
 
   return (
-    recipesAPI.length > 1 && (
+    recipes.length >= 1 && (
       <article>
-        { recipesAPI.slice(0, MAXRECIPES)
-          .map((item, index) => (
-            <CardRecipe
-              key={ index }
-              testid={ `${index}-recipe-card` }
-              index={ index }
-              recipe={ item }
-            />)) }
+        { recipes.slice(0, MAXRECIPES).map((item, index) => (
+          <CardRecipe
+            key={ index }
+            testid={ `${index}-recipe-card` }
+            index={ index }
+            recipe={ item }
+          />)) }
       </article>
     )
   );
