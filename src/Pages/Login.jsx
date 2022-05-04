@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react';
-// import PropTypes from 'prop-types';
+import '../Styles/Login.css';
 import { Redirect } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
+import { setStorageUser,
+  setStorageCocktailsToken,
+  setStorageMealsToken } from '../Services/localStorage';
 
 function Login() {
   const [emailInput, setEmailInput] = useState('');
@@ -17,9 +20,9 @@ function Login() {
 
   const handleClick = () => {
     const user = { email: emailInput };
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-    localStorage.setItem('user', JSON.stringify(user));
+    setStorageCocktailsToken(1);
+    setStorageMealsToken(1);
+    setStorageUser(user);
     setEmail(emailInput);
     setLogin(false);
   };

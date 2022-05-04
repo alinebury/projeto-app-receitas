@@ -3,24 +3,24 @@ import PropTypes from 'prop-types';
 import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
+import { getStorageFavoriteRecipes,
+  setStorageFavoriteRecipes,
+  removeStorageFavoriteRecipes } from '../Services/localStorage';
 
 function ButtonsOfDetails({ id, objRecipe, url }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   useEffect(() => {
-    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
+    setIsFavorite(getStorageFavoriteRecipes().some((favRecipe) => favRecipe.id === id));
   }, []);
 
-  useEffect(() => {
-    setIsFavorite(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
-  }, [id, favoriteRecipes]);
-
   const buttonFavorite = () => {
-    setIsFavorite((prev) => !prev);
-    const listFavorites = [...favoriteRecipes, objRecipe];
-    localStorage.setItem('favoriteRecipes', JSON.stringify(listFavorites));
+    setIsFavorite((prev) => {
+      if (prev) removeStorageFavoriteRecipes(objRecipe);
+      else setStorageFavoriteRecipes(objRecipe);
+      return !prev;
+    });
   };
 
   const handleButtonShare = () => {
