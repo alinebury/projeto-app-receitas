@@ -6,6 +6,8 @@ import { fetchOneDrinkRecipe, fetchDrinkRecommendation } from '../Api/drinksAPI'
 import Recommendations from '../Components/RecomendationsList';
 import ButtonsOfDetails from '../Components/ButtonsOfDetails';
 import '../Styles/DetailRecipes.css';
+import { getStorageInProgressRecipes,
+  setStorageInProgressRecipes } from '../Services/localStorage';
 
 function objOfRecipe(recipe, id, isFood) {
   return ({
@@ -27,7 +29,6 @@ function DetailRecipes(props) {
   const [recommendation, setRecommendation] = useState([]);
   const [ingredient, setIgredient] = useState([]);
   const [textButtonStarRecipe, setTextButtonStarRecipe] = useState();
-  const [inProgressRecipes, setInProgressRecipes] = useState();
   const isFood = url.includes('foods');
   const fecthAPIRecipe = isFood ? (
     async () => {
@@ -43,16 +44,13 @@ function DetailRecipes(props) {
 
   useEffect(() => {
     fecthAPIRecipe();
-    const progressRecipe = JSON.parse(localStorage
-      .getItem('inProgressRecipes')) || { cocktails: {}, meals: {} };
-    setInProgressRecipes(progressRecipe);
+    const progressRecipe = getStorageInProgressRecipes();
     setTextButtonStarRecipe(
       Object.values(progressRecipe)
         .some((reci) => reci[id]) ? 'Continue Recipe' : 'Star Recipe',
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
-  console.log(inProgressRecipes);
 
   useEffect(() => {
     if (recipe.length > 0) {
@@ -68,11 +66,7 @@ function DetailRecipes(props) {
 
   const buttonStarRecipe = () => {
     if (textButtonStarRecipe === 'Star Recipe') {
-      const starRecipe = isFood
-        ? { meals: { ...inProgressRecipes.meals, [id]: [] } }
-        : { cocktails: { ...inProgressRecipes.cocktails, [id]: [] } };
-      const newInProgress = { ...inProgressRecipes, ...starRecipe };
-      localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgress));
+      setStorageInProgressRecipes(id, isFood);
     }
     history.push(`${url}/in-progress`);
   };

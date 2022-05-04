@@ -23,6 +23,7 @@ function Categories(props) {
       <button
         key={ id }
         type="button"
+        className="btn-categories"
         id={ `category-${index}` }
         name={ `category-${index}` }
         onClick={ () => setCategories(
@@ -49,6 +50,7 @@ function Categories(props) {
         type="button"
         onClick={ () => setCategories('') }
         data-testid="All-category-filter"
+        className="btn-categories"
       >
         All
       </button>

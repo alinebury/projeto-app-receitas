@@ -1,7 +1,7 @@
 header nav {
   align-items: center;
   align-self: center;
-  background: rgb(34, 34, 34);
+  background: lightgray;
   display: flex;
   justify-content: space-around;
   right: 0;
