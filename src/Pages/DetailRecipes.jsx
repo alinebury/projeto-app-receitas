@@ -4,17 +4,31 @@ import PropTypes from 'prop-types';
 import { fetchOneFoodRecipe, fetchFoodRecommendation } from '../Api/foodsAPI';
 import { fetchOneDrinkRecipe, fetchDrinkRecommendation } from '../Api/drinksAPI';
 import Recommendations from '../Components/RecomendationsList';
+import ButtonsOfDetails from '../Components/ButtonsOfDetails';
 import '../Styles/DetailRecipes.css';
 
-// const NUMBER_SIX = 6;
+function objOfRecipe(recipe, id, isFood) {
+  return ({
+    id,
+    type: isFood ? 'food' : 'drink',
+    nationality: recipe[0].strArea || '',
+    category: recipe[0].strCategory || '',
+    alcoholicOrNot: recipe[0].strAlcoholic || '',
+    name: isFood ? recipe[0].strMeal : recipe[0].strDrink,
+    image: isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb,
+  });
+}
 
 function DetailRecipes(props) {
   const history = useHistory();
   const { match: { url, params: { id } } } = props;
   const [recipe, setRecipe] = useState([]);
+  const [objRecipe, setObjRecipe] = useState({});
   const [recommendation, setRecommendation] = useState([]);
   const [ingredient, setIgredient] = useState([]);
-  const isFood = url.includes('foods'); // mudar
+  const [textButtonStarRecipe, setTextButtonStarRecipe] = useState();
+  const [inProgressRecipes, setInProgressRecipes] = useState();
+  const isFood = url.includes('foods');
   const fecthAPIRecipe = isFood ? (
     async () => {
       setRecipe(await fetchOneFoodRecipe(id));
@@ -26,13 +40,19 @@ function DetailRecipes(props) {
       setRecommendation(await fetchFoodRecommendation());
     }
   );
-  // id food = 52771
-  // id drink = 178319
 
   useEffect(() => {
     fecthAPIRecipe();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    const progressRecipe = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: {} };
+    setInProgressRecipes(progressRecipe);
+    setTextButtonStarRecipe(
+      Object.values(progressRecipe)
+        .some((reci) => reci[id]) ? 'Continue Recipe' : 'Star Recipe',
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [id]);
+  console.log(inProgressRecipes);
 
   useEffect(() => {
     if (recipe.length > 0) {
@@ -41,30 +61,42 @@ function DetailRecipes(props) {
         .map((ingre) => recipe[0][ingre])
         .filter((ing) => ing != null && ing !== '');
       setIgredient(ingredients);
-    }
-  }, [recipe]);
 
-  // console.log(recommendation);
-  // console.log(ingredient);
-  // console.log(recommendation.slice(0, NUMBER_SIX));
+      setObjRecipe(objOfRecipe(recipe, id, isFood));
+    }
+  }, [id, isFood, recipe]);
+
+  const buttonStarRecipe = () => {
+    if (textButtonStarRecipe === 'Star Recipe') {
+      const starRecipe = isFood
+        ? { meals: { ...inProgressRecipes.meals, [id]: [] } }
+        : { cocktails: { ...inProgressRecipes.cocktails, [id]: [] } };
+      const newInProgress = { ...inProgressRecipes, ...starRecipe };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgress));
+    }
+    history.push(`${url}/in-progress`);
+  };
 
   return (
     <div>
-      { recipe.length === 0 ? <p>Carregando...</p> : (
+      { recipe.length !== 0 && (
         <>
           <img
             width="100%"
             data-testid="recipe-photo"
-            src={
-              isFood ? recipe[0].strMealThumb : recipe[0].strDrinkThumb
-            }
-            alt={ isFood ? recipe[0].strMeal : recipe[0].strDrink }
+            src={ objRecipe.image }
+            alt={ objRecipe.name }
           />
           <h2 data-testid="recipe-title">
-            { isFood ? recipe[0].strMeal : recipe[0].strDrink }
+            { objRecipe.name }
           </h2>
-          <button type="button" data-testid="share-btn">Compartilhar</button>
-          <button type="button" data-testid="favorite-btn">Favoritar</button>
+
+          <ButtonsOfDetails
+            objRecipe={ objRecipe }
+            id={ id }
+            url={ url }
+          />
+
           <h3 data-testid="recipe-category">
             { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
           </h3>
@@ -89,9 +121,9 @@ function DetailRecipes(props) {
             className="btnStartRecipe"
             type="button"
             data-testid="start-recipe-btn"
-            onClick={ () => history.push(`${url}/in-progress`) }
+            onClick={ buttonStarRecipe }
           >
-            Star Recipe
+            {textButtonStarRecipe}
           </button>
         </>
       ) }
