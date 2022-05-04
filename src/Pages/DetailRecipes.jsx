@@ -26,9 +26,9 @@ function DetailRecipes(props) {
   const [objRecipe, setObjRecipe] = useState({});
   const [recommendation, setRecommendation] = useState([]);
   const [ingredient, setIgredient] = useState([]);
-  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const [textButtonStarRecipe, setTextButtonStarRecipe] = useState();
   const [inProgressRecipes, setInProgressRecipes] = useState();
-  const isFood = url.includes('foods'); // mudar
+  const isFood = url.includes('foods');
   const fecthAPIRecipe = isFood ? (
     async () => {
       setRecipe(await fetchOneFoodRecipe(id));
@@ -40,17 +40,19 @@ function DetailRecipes(props) {
       setRecommendation(await fetchFoodRecommendation());
     }
   );
-  // id food test = 52771
-  // id drink test = 178319
 
   useEffect(() => {
     fecthAPIRecipe();
-    setInProgressRecipes(JSON.parse(localStorage
-      .getItem('inProgressRecipes')) || '{ cocktails: {}, meals: {}}');
-    console.log(inProgressRecipes);
-    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
+    const progressRecipe = JSON.parse(localStorage
+      .getItem('inProgressRecipes')) || { cocktails: {}, meals: {} };
+    setInProgressRecipes(progressRecipe);
+    setTextButtonStarRecipe(
+      Object.values(progressRecipe)
+        .some((reci) => reci[id]) ? 'Continue Recipe' : 'Star Recipe',
+    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
+  console.log(inProgressRecipes);
 
   useEffect(() => {
     if (recipe.length > 0) {
@@ -65,8 +67,13 @@ function DetailRecipes(props) {
   }, [id, isFood, recipe]);
 
   const buttonStarRecipe = () => {
-    // const newInProgress = { ...}
-    // localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgress));
+    if (textButtonStarRecipe === 'Star Recipe') {
+      const starRecipe = isFood
+        ? { meals: { ...inProgressRecipes.meals, [id]: [] } }
+        : { cocktails: { ...inProgressRecipes.cocktails, [id]: [] } };
+      const newInProgress = { ...inProgressRecipes, ...starRecipe };
+      localStorage.setItem('inProgressRecipes', JSON.stringify(newInProgress));
+    }
     history.push(`${url}/in-progress`);
   };
 
@@ -86,7 +93,6 @@ function DetailRecipes(props) {
 
           <ButtonsOfDetails
             objRecipe={ objRecipe }
-            favoriteRecipes={ favoriteRecipes }
             id={ id }
             url={ url }
           />
@@ -117,7 +123,7 @@ function DetailRecipes(props) {
             data-testid="start-recipe-btn"
             onClick={ buttonStarRecipe }
           >
-            Star Recipe
+            {textButtonStarRecipe}
           </button>
         </>
       ) }

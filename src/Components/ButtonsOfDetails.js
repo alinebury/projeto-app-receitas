@@ -4,9 +4,14 @@ import shareIcon from '../images/shareIcon.svg';
 import whiteHeartIcon from '../images/whiteHeartIcon.svg';
 import blackHeartIcon from '../images/blackHeartIcon.svg';
 
-function ButtonsOfDetails({ id, favoriteRecipes, objRecipe, url }) {
+function ButtonsOfDetails({ id, objRecipe, url }) {
   const [isCopied, setIsCopied] = useState(false);
   const [isFavorite, setIsFavorite] = useState(false);
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+
+  useEffect(() => {
+    setFavoriteRecipes(JSON.parse(localStorage.getItem('favoriteRecipes') || '[]'));
+  }, []);
 
   useEffect(() => {
     setIsFavorite(favoriteRecipes.some((favRecipe) => favRecipe.id === id));
@@ -50,7 +55,7 @@ function ButtonsOfDetails({ id, favoriteRecipes, objRecipe, url }) {
 
 ButtonsOfDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  favoriteRecipes: PropTypes.arrayOf(PropTypes.any).isRequired,
+  // favoriteRecipes: PropTypes.arrayOf(PropTypes.any).isRequired,
   objRecipe: PropTypes.shape({}).isRequired,
   url: PropTypes.string.isRequired,
 };
