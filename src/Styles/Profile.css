@@ -7,14 +7,14 @@
   justify-content: space-around;
   position: relative;
 }
-  
+
 .profile-page p {
   color: rgb(212, 212, 212);
   font-size: 1.5rem;
   position: absolute;
   top: 110px;
 }
-  
+
 .btn-profile {
   display: flex;
   flex-direction: column;
