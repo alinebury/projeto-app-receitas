@@ -1,88 +1,12 @@
 body {
   background-color: gray;
-  position: relative;
 }
 
-.login-container {
-  align-items: center;
-  background-size: cover;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-  max-width: 360px;
-  object-fit: cover;
-  object-position: top;
-  position: relative;
-}
-
-.buttons {
-  bottom: 120px;
-  display: flex;
-  flex-direction: column;
-  position: absolute;
-}
-
-.title, .login-text {
-  color: rgb(241, 241, 241);
-  font-family: Poppins , sans-serif;
-  font-size: 2rem;
-}
-
-.title {
-  font-style: italic;
-  position: absolute;
-  top: 30px;
-}
-
-.login-text {
-  bottom: 230px;
-  font-size: 1.5rem;
-  position: absolute;
-}
-
-.input-login {
-  background: none;
-  border: none;
-  border-bottom: 2px solid rgb(224, 224, 224);
-  color: rgb(241, 241, 241);
-  outline: none;
-  width: 200px;
-}
-
-.input-login:focus {
-  border-bottom: 2px solid rgb(57, 156, 0);
-}
-
-.input-login::placeholder, .text {
-  color: rgb(224, 224, 224);
-}
-
-.entrar-btn, .finish-btn {
-  background: rgb(48, 48, 48);
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  margin-top: 20px;
-  outline: none;
-  padding: 8px 14px;
-  width: 100%;
-}
-
-.enable {
-  border-bottom: 2px solid rgb(140, 243, 140);
-  color: rgb(140, 243, 140);
-  text-shadow: 0 0 2px green;
-}
-
-.enable:hover {
-  border-bottom: 2px solid rgb(224, 224, 224);
-  color: rgb(224, 224, 224);
-  text-shadow: 0 0 2px rgb(224, 224, 224);
-}
-
-.disable {
-  border-bottom: 2px solid rgb(235, 116, 116);
-  color: rgb(235, 116, 116);
-  text-shadow: 0 0 2px red;
+.btn-categories {
+  background-color: #242424;
+  border-radius: 10px;
+  color: white;
+  height: 30px;
+  margin: 1.8px;
+  margin-bottom: 4px;
 }
