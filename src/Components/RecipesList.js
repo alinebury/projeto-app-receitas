@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import RecipesContext from '../Context/RecipesContext';
 import CardRecipe from './CardRecipe';
+import '../Styles/RecipesList.css';
 
 function RecipesList() {
   const { recipes } = useContext(RecipesContext);
@@ -8,7 +9,7 @@ function RecipesList() {
 
   return (
     recipes.length >= 1 && (
-      <article>
+      <article className="recipesList">
         { recipes.slice(0, MAXRECIPES).map((item, index) => (
           <CardRecipe
             key={ index }
