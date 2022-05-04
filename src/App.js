@@ -28,6 +28,11 @@ function App() {
             path="/explore/foods/nationalities"
             component={ ExploreFoodNationalities }
           />
+          <Route
+            exact
+            path="/explore/drinks/nationalities"
+            component={ NotFound }
+          />
           <Route exact path="/foods" component={ Foods } />
           <Route exact path="/drinks" component={ Drinks } />
           <Route exact path="/foods/:id" component={ DetailRecipes } />
