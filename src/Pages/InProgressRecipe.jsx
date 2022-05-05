@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
 import ButtonsOfDetails from '../Components/ButtonsOfDetails';
 import Ingredients from '../Components/Ingredients';
 import '../Styles/DetailRecipes.css';
 import { fetchOneFoodRecipe } from '../Api/foodsAPI';
 import { fetchOneDrinkRecipe } from '../Api/drinksAPI';
+import { setStorageDoneRecipes } from '../Services/localStorage';
 
 function objOfRecipe(recipe, id, isFood) {
-  console.log(recipe);
   return ({
     id,
     type: isFood ? 'food' : 'drink',
@@ -19,11 +20,23 @@ function objOfRecipe(recipe, id, isFood) {
   });
 }
 
+function objOfDoneRecipe(objRecipe, recipe) {
+  const date = new Date();
+  const doneDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  return {
+    ...objRecipe,
+    doneDate,
+    tags: recipe[0].strTags ? recipe[0].strTags.split(', ') : [],
+  };
+}
+
 function InProgressRecipe(props) {
+  const history = useHistory();
   const { match: { url, params: { id } } } = props;
   const [recipe, setRecipe] = useState([]);
   const [ingredients, setIngredients] = useState([]);
   const [recipeObj, setRecipeObj] = useState({});
+  const [cantFinish, setCantFinish] = useState(true);
   const isFood = url.includes('food');
   const fecthAPIRecipe = isFood ? (
     async () => setRecipe(await fetchOneFoodRecipe(id))
@@ -37,12 +50,16 @@ function InProgressRecipe(props) {
 
   useEffect(() => {
     if (recipe.length === 0) return;
-    console.log(recipe);
     setRecipeObj(objOfRecipe(recipe, id, isFood));
     setIngredients((Object.keys(recipe[0])
       .filter((item) => item.includes('strIngredient')
       && recipe[0][item] && recipe[0][item] !== '')));
   }, [recipe]);
+
+  const handleButton = () => {
+    setStorageDoneRecipes(objOfDoneRecipe(recipeObj, recipe));
+    history.push('/done-recipes');
+  };
 
   return (
     <div>
@@ -60,7 +77,7 @@ function InProgressRecipe(props) {
           <ButtonsOfDetails
             objRecipe={ recipeObj }
             id={ id }
-            url={ url }
+            url={ url.replace('/in-progress', '') }
           />
           <h3 data-testid="recipe-category">
             { isFood ? recipeObj.strCategory : recipeObj.strAlcoholic }
@@ -70,13 +87,15 @@ function InProgressRecipe(props) {
             itens={ ingredients }
             recipe={ recipe[0] }
             isFood={ isFood }
+            handleButton={ setCantFinish }
           /> }
           <p data-testid="instructions">{ recipe[0].strInstructions }</p>
           <button
             className="btnStartRecipe"// mago do css resolva isso aq
             type="button"
             data-testid="finish-recipe-btn"
-            onClick={ () => console.log('fon') }
+            onClick={ handleButton }
+            disabled={ cantFinish }
           >
             Finish Recipe
           </button>

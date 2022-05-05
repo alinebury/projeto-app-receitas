@@ -7,7 +7,7 @@ import { setStorageInProgressIngredient,
   setStorageInProgressRecipes } from '../Services/localStorage';
 
 function Ingredients(props) {
-  const { itens, recipe, id, isFood } = props;
+  const { itens, recipe, id, isFood, handleButton } = props;
   const [list, setList] = useState([]);
 
   const handleChecked = (item) => {
@@ -19,19 +19,25 @@ function Ingredients(props) {
     return false;
   };
 
-  useEffect(() => (
-    setStorageInProgressRecipes(id, isFood)
-  ), []);
+  useEffect(() => {
+    const key = isFood ? 'meals' : 'cocktails';
+    const storage = getStorageInProgressRecipes()[key];
+    if (!storage[id]) setStorageInProgressRecipes(id, isFood);
+  }, []);
 
   useEffect(() => {
-    setList(itens.map((item) => handleChecked(recipe[item])));
+    const newList = itens.map((item) => handleChecked(recipe[item]));
+    handleButton(newList.includes(false));
+    setList(newList);
   }, [itens]);
 
   const handleOnChange = (check, ingredient) => {
     const storage = check ? setStorageInProgressIngredient
       : removeStorageInProgressIngredient;
     storage(id, isFood, recipe[ingredient]);
-    setList(itens.map((item) => handleChecked(recipe[item])));
+    const newList = itens.map((item) => handleChecked(recipe[item]));
+    handleButton(newList.includes(false));
+    setList(newList);
   };
 
   return (
