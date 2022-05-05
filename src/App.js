@@ -16,6 +16,7 @@ import ExploreFood from './Pages/ExploreFood';
 import ExploreFoodIngredients from './Pages/ExploreFoodIngredients';
 import ExploreFoodNationalities from './Pages/ExploreFoodNationalities';
 import Profile from './Pages/Profile';
+import InProgressRecipe from './Pages/InProgressRecipe';
 
 function App() {
   return (
@@ -46,11 +47,10 @@ function App() {
             path="/explore/foods/ingredients"
             component={ ExploreFoodIngredients }
           />
-          <Route exact path="/explore/foods/:id" component={ ExploreFood } />
           <Route
             exact
-            path="/explore/foods/:id/in-progress"
-            component={ ExploreFood }
+            path="/foods/:id/in-progress"
+            component={ InProgressRecipe }
           />
           <Route exact path="/explore/drinks" component={ ExploreDrinks } />
           <Route
@@ -58,11 +58,10 @@ function App() {
             path="/explore/drinks/ingredients"
             component={ ExploreDrinkIngredients }
           />
-          <Route exact path="/explore/drinks/:id" component={ ExploreDrinks } />
           <Route
             exact
-            path="/explore/drinks/:id/in-progress"
-            component={ ExploreDrinks }
+            path="/drinks/:id/in-progress"
+            component={ InProgressRecipe }
           />
           <Route exact path="/profile" component={ Profile } />
           <Route exact path="/*" component={ NotFound } />

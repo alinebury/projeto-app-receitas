@@ -1,5 +1,6 @@
 const FAVORITE_RECIPES = 'favoriteRecipes';
 const PROGRESS_RECIPES = 'inProgressRecipes';
+const DONE_RECIPES = 'doneRecipes';
 const MEALS_TOKEN = 'mealsToken';
 const COCKTIL_TOKEN = 'cocktailsToken';
 const USER = 'user';
@@ -37,6 +38,28 @@ export function setStorageInProgressRecipes(id, isFood) {
   localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
 }
 
+export function setStorageInProgressIngredient(id, isFood, item) {
+  const prev = getStorageInProgressRecipes();
+  const starRecipe = isFood
+    ? { meals: { ...prev.meals, [id]: [...prev.meals[id], item] } }
+    : { cocktails: { ...prev.cocktails, [id]: [...prev.cocktails[id], item] } };
+  const newInProgress = { ...prev, ...starRecipe };
+  localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
+}
+
+export function removeStorageInProgressIngredient(id, isFood, item) {
+  const prev = getStorageInProgressRecipes();
+  const starRecipe = isFood
+    ? { meals:
+      { ...prev.meals,
+        [id]: [...prev.meals[id].filter((ingre) => ingre !== item)] } }
+    : { cocktails:
+      { ...prev.cocktails,
+        [id]: [...prev.cocktails[id].filter((ingre) => ingre !== item)] } };
+  const newInProgress = { ...prev, ...starRecipe };
+  localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
+}
+
 export function setStorageMealsToken(storage) {
   localStorage.setItem(MEALS_TOKEN, storage);
 }
@@ -47,4 +70,15 @@ export function setStorageCocktailsToken(storage) {
 
 export function setStorageUser(storage) {
   localStorage.setItem(USER, JSON.stringify(storage));
+}
+
+export function getStorageDoneRecipes() {
+  const validate = localStorage.getItem(DONE_RECIPES);
+  return validate ? JSON.parse(validate) : [];
+}
+
+export function setStorageDoneRecipes(storage) {
+  const prev = getStorageDoneRecipes();
+  const newStorage = [...prev, storage];
+  localStorage.setItem(DONE_RECIPES, JSON.stringify(newStorage));
 }

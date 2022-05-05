@@ -16,7 +16,7 @@ function Categories(props) {
     ? async () => setRecipes(await fetchFoodsFilterToCategory(categories))
     : async () => setRecipes(await fetchDrinksFilterToCategory(categories));
 
-  function checkbox(item, index) {
+  function buttons(item, index) {
     const { strCategory } = item;
     const id = Math.random(Number(type === 'foods' ? item.idMeal : item.idDrink));
     return (
@@ -55,7 +55,7 @@ function Categories(props) {
         All
       </button>
       { categoriesAPI.slice(0, MAXCATEGORIES)
-        .map((item, index) => checkbox(item, index)) }
+        .map((item, index) => buttons(item, index)) }
     </div>
   );
 }

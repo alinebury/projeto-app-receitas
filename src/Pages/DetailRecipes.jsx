@@ -59,7 +59,6 @@ function DetailRecipes(props) {
         .map((ingre) => recipe[0][ingre])
         .filter((ing) => ing != null && ing !== '');
       setIgredient(ingredients);
-
       setObjRecipe(objOfRecipe(recipe, id, isFood));
     }
   }, [id, isFood, recipe]);
@@ -76,7 +75,7 @@ function DetailRecipes(props) {
       { recipe.length !== 0 && (
         <>
           <img
-            width="100%"
+            width="100%"// mago do css resolva isso aq
             data-testid="recipe-photo"
             src={ objRecipe.image }
             alt={ objRecipe.name }
@@ -95,12 +94,12 @@ function DetailRecipes(props) {
             { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
           </h3>
           <ul>
-            { ingredient.map((whatever, index) => (
+            { ingredient.map((item, index) => (
               <li
                 key={ index }
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
-                {`${ingredient[index]} - ${recipe[0][`strMeasure${index + 1}`]}`}
+                {`${item} - ${recipe[0][`strMeasure${index + 1}`]}`}
               </li>
             )) }
           </ul>
@@ -117,7 +116,7 @@ function DetailRecipes(props) {
             data-testid="start-recipe-btn"
             onClick={ buttonStarRecipe }
           >
-            {textButtonStarRecipe}
+            { textButtonStarRecipe }
           </button>
         </>
       ) }
