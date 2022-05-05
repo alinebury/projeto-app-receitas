@@ -37,6 +37,28 @@ export function setStorageInProgressRecipes(id, isFood) {
   localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
 }
 
+export function setStorageInProgressIngredient(id, isFood, item) {
+  const prev = getStorageInProgressRecipes();
+  const starRecipe = isFood
+    ? { meals: { ...prev.meals, [id]: [...prev.meals[id], item] } }
+    : { cocktails: { ...prev.cocktails, [id]: [...prev.cocktails[id], item] } };
+  const newInProgress = { ...prev, ...starRecipe };
+  localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
+}
+
+export function removeStorageInProgressIngredient(id, isFood, item) {
+  const prev = getStorageInProgressRecipes();
+  const starRecipe = isFood
+    ? { meals:
+      { ...prev.meals,
+        [id]: [...prev.meals[id].filter((ingre) => ingre !== item)] } }
+    : { cocktails:
+      { ...prev.cocktails,
+        [id]: [...prev.cocktails[id].filter((ingre) => ingre !== item)] } };
+  const newInProgress = { ...prev, ...starRecipe };
+  localStorage.setItem(PROGRESS_RECIPES, JSON.stringify(newInProgress));
+}
+
 export function setStorageMealsToken(storage) {
   localStorage.setItem(MEALS_TOKEN, storage);
 }
