@@ -27,7 +27,7 @@ function CardHorizontalRecipe(props) {
     <div>
       <Link to={ `${recipe.type}s/${recipe.id}` }>
         <img
-          width="100%"
+          width="100%" // mago do css resolva isso aqui
           data-testid={ `${index}-horizontal-image` }
           src={ recipe.image }
           alt={ recipe.name }
@@ -62,19 +62,22 @@ function CardHorizontalRecipe(props) {
       <Link to={ `${recipe.type}s/${recipe.id}` }>
         <p data-testid={ `${index}-horizontal-name` }>{recipe.name}</p>
       </Link>
-      <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
+
       { doneOrFavorite.includes('Done') && (
-        <p>
-          {recipe.tags.length > 0 && recipe.tags
-            .slice(0, 2).map((tag) => (
-              <span
-                key={ tag }
-                data-testid={ `${index}-${tag}-horizontal-tag` }
-              >
-                {tag}
-              </span>
-            ))}
-        </p>)}
+        <>
+          <p data-testid={ `${index}-horizontal-done-date` }>{recipe.doneDate}</p>
+          <p>
+            {recipe.tags.length > 0 && recipe.tags
+              .slice(0, 2).map((tag) => (
+                <span
+                  key={ tag }
+                  data-testid={ `${index}-${tag}-horizontal-tag` }
+                >
+                  {tag}
+                </span>
+              ))}
+          </p>
+        </>)}
     </div>
   );
 }
