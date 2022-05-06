@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import RecipesContext from '../Context/RecipesContext';
 import { fetchFoodsRecipes } from '../Api/foodsAPI';
@@ -7,11 +7,8 @@ import { fetchDrinksRecipes } from '../Api/drinksAPI';
 function Search() {
   const history = useHistory();
   const {
-    showSearchBar, title, setRecipes, search } = useContext(RecipesContext);
-  const [radioAPI, setRadioAPI] = useState({
-    search: '',
-    searchRadio: '',
-  });
+    showSearchBar, title, setRecipes, search,
+    radioAPI, setRadioAPI } = useContext(RecipesContext);
 
   const handleClick = ({ target: { value, name } }) => {
     setRadioAPI((prevState) => ({

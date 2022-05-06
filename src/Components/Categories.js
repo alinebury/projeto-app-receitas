@@ -10,7 +10,7 @@ function Categories(props) {
   const { type } = props;
   const { categoriesAPI,
     recipesAPI, setRecipes,
-    categories, setCategories } = useContext(RecipesContext);
+    categories, setCategories, redirect } = useContext(RecipesContext);
 
   const fetchFilterCategory = type === 'foods'
     ? async () => setRecipes(await fetchFoodsFilterToCategory(categories))
@@ -39,7 +39,7 @@ function Categories(props) {
   useEffect(() => {
     if (categories !== '') {
       fetchFilterCategory(categories);
-    } else {
+    } else if (!redirect) {
       setRecipes(recipesAPI);
     }
   }, [categories]);
