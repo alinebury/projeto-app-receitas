@@ -22,9 +22,15 @@ function Header() {
               alt="search icon"
             />
           </button>) }
-        <h2 data-testid="page-title">{ title }</h2>
+        <h2
+          className="foods-title"
+          data-testid="page-title"
+        >
+          { title }
+        </h2>
         <Link to="/profile">
           <img
+            className="profile-top"
             data-testid="profile-top-btn"
             src={ profileIcon }
             alt="profile icon"

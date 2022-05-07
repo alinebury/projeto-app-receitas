@@ -1,12 +1,24 @@
 body {
-  background-color: gray;
+  background: linear-gradient(to bottom, black 50%, rgb(17, 17, 17));
+  color: white;
 }
 
 .btn-categories {
-  background-color: #242424;
+  background: rgb(41, 41, 41);
+  border: none;
   border-radius: 10px;
   color: white;
   height: 30px;
-  margin: 1.8px;
-  margin-bottom: 4px;
+  font-family: Poppins;
+  font-size: 15px;
+  font-style: italic;
+  margin: 5px;
+  margin-bottom: 20px;
+  margin-top: 15px;
+  outline: none;
+  padding: 4px 5px;
+}
+
+button, btn-categories {
+  border-radius: 10px;
 }

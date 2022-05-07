@@ -1,11 +1,16 @@
 header nav {
   align-items: center;
   align-self: center;
-  background: lightgray;
+  background: rgb(7, 7, 7);
+  color: white;
   display: flex;
+  font-family: Poppins;
+  font-style: italic;
   justify-content: space-around;
+  line-height: 20px;
   right: 0;
   text-align: center;
+  text-shadow: 0 0 3px white;
   width: 100%;
 }
 
@@ -14,7 +19,14 @@ button {
 }
 
 .profile {
-  background-color: white;
-  padding: 3px;
+  background-color: rgb(255, 255, 255);
+  padding: 8px;
   width: 40px;
+}
+
+.profile-top {
+  margin-top: 7px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 10px;
 }

@@ -10,6 +10,7 @@ function Footer() {
   return (
     <footer className="footer" data-testid="footer">
       <button
+        className="buttons-icons"
         type="button"
         data-testid="drinks-bottom-btn"
         src="../images/drinkIcon.svg"
@@ -18,6 +19,7 @@ function Footer() {
         <img src={ drinkIcon } alt="Drink Icon" />
       </button>
       <button
+        className="buttons-icons"
         type="button"
         data-testid="explore-bottom-btn"
         src="../images/exploreIcon.svg"
@@ -26,6 +28,7 @@ function Footer() {
         <img src={ exploreIcon } alt="Explore Icon" />
       </button>
       <button
+        className="buttons-icons"
         type="button"
         data-testid="food-bottom-btn"
         src="../images/mealIcon.svg"
