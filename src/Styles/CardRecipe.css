@@ -1,8 +1,8 @@
 .cardImage {
-  display: flex;
   background-color: black;
   border-bottom-left-radius: 40%;
   border-bottom-right-radius: 40%;
+  display: flex;
   justify-content: space-around;
   position: absolute;
   width: 100%;
@@ -10,13 +10,10 @@
 }
 
 .card {
-  margin: 21px;
-}
-
-.card {
+   margin: 21px;
+  min-height: 190px;
   position: relative;
   width: 130px;
-  min-height: 190px;
 }
 
 .card span {
@@ -30,7 +27,7 @@
 }
 
 .card::before {
-  background: linear-gradient(315deg, #00ccff, rgb(7, 7, 7), #e7e7e7);
+  background: linear-gradient(315deg, #0cf, rgb(7, 7, 7), #e7e7e7);
   bottom: -4px;
   content: '';
   left: -4px;
@@ -41,7 +38,7 @@
 }
 
 .card::after {
-  background: linear-gradient(315deg, #00ccff, rgb(7, 7, 7), #e7e7e7);
+  background: linear-gradient(315deg, #0cf, rgb(7, 7, 7), #e7e7e7);
   bottom: -4px;
   content: '';
   filter: blur(6px);

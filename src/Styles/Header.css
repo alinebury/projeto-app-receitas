@@ -4,7 +4,6 @@ header nav {
   background: rgb(7, 7, 7);
   color: white;
   display: flex;
-  font-family: Poppins;
   font-style: italic;
   justify-content: space-around;
   line-height: 20px;
@@ -19,14 +18,14 @@ button {
 }
 
 .profile {
-  background-color: rgb(255, 255, 255);
+  background-color: white;
   padding: 8px;
   width: 40px;
 }
 
 .profile-top {
-  margin-top: 7px;
   background-color: white;
+  margin-top: 7px;
   border-radius: 30px;
   padding: 10px;
 }

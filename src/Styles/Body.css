@@ -9,16 +9,15 @@ body {
   border-radius: 10px;
   color: white;
   height: 30px;
-  font-family: Poppins;
   font-size: 15px;
   font-style: italic;
-  margin: 5px;
+  margin: 3.2px;
   margin-bottom: 20px;
   margin-top: 15px;
   outline: none;
   padding: 4px 5px;
 }
 
-button, btn-categories {
+button {
   border-radius: 10px;
 }
