@@ -81,3 +81,27 @@ export async function fetchFoodIngredient() {
     return [];
   }
 }
+
+export async function fetchFoodNationalities() {
+  try {
+    const response = await fetch('https://www.themealdb.com/api/json/v1/1/list.php?a=list');
+    const result = await response.json();
+    console.log(result);
+    return result.meals ? result.meals : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function fetchFoodsByNationalities(nationalities) {
+  try {
+    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${nationalities}`);
+    const result = await response.json();
+    console.log(result);
+    return result.meals ? result.meals : [];
+  } catch (error) {
+    console.log(error);
+    console.log(nationalities);
+    return [];
+  }
+}
