@@ -32,11 +32,8 @@ function RecipesProvider({ children }) {
       resultCategoriesAPI = await fetchDrinksCategories();
     }
     setRecipesAPI(resulRecipestAPI);
-    if (!redirect) {
-      setRecipes(resulRecipestAPI);
-    } else {
-      setRedirect(false);
-    }
+    if (!redirect) setRecipes(resulRecipestAPI);
+    else setRedirect(false);
     setCategoriesAPI(resultCategoriesAPI);
   }
 
