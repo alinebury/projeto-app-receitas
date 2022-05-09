@@ -25,3 +25,7 @@ button {
   display: flex;
   justify-content: space-around;
 }
+
+.complete {
+  text-decoration: line-through;
+}

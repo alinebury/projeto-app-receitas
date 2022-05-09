@@ -15,6 +15,11 @@ function RecipesProvider({ children }) {
   const [recipes, setRecipes] = useState([]);
   const [categoriesAPI, setCategoriesAPI] = useState([]);
   const [categories, setCategories] = useState('');
+  const [radioAPI, setRadioAPI] = useState({
+    search: '',
+    searchRadio: '',
+  });
+  const [redirect, setRedirect] = useState(false);
 
   async function getSearch(type) {
     let resulRecipestAPI;
@@ -27,7 +32,8 @@ function RecipesProvider({ children }) {
       resultCategoriesAPI = await fetchDrinksCategories();
     }
     setRecipesAPI(resulRecipestAPI);
-    setRecipes(resulRecipestAPI);
+    if (!redirect) setRecipes(resulRecipestAPI);
+    else setRedirect(false);
     setCategoriesAPI(resultCategoriesAPI);
   }
 
@@ -53,6 +59,10 @@ function RecipesProvider({ children }) {
     setCategories,
     recipes,
     setRecipes,
+    radioAPI,
+    setRadioAPI,
+    redirect,
+    setRedirect,
   };
 
   return (

@@ -7,11 +7,12 @@ import RecipesList from '../Components/RecipesList';
 import Categories from '../Components/Categories';
 
 function Drinks() {
-  const { setTitle, setShowSearchBar, getSearch } = useContext(RecipesContext);
+  const { setTitle, setShowSearchBar, getSearch, setSearch } = useContext(RecipesContext);
   useEffect(() => {
     setTitle('Drinks');
     getSearch('Drinks');
     setShowSearchBar(false);
+    setSearch(true);
   }, []);
 
   return (

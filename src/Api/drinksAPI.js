@@ -61,3 +61,23 @@ export async function fetchDrinkRecommendation() {
     return [];
   }
 }
+
+export async function fetchDrinkRandom() {
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/random.php');
+    const result = await response.json();
+    return result.drinks ? result.drinks : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+export async function fetchDrinkIngredient() {
+  try {
+    const response = await fetch('https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list');
+    const result = await response.json();
+    return result.drinks ? result.drinks : [];
+  } catch (error) {
+    return [];
+  }
+}

@@ -10,13 +10,13 @@ function Categories(props) {
   const { type } = props;
   const { categoriesAPI,
     recipesAPI, setRecipes,
-    categories, setCategories } = useContext(RecipesContext);
+    categories, setCategories, redirect } = useContext(RecipesContext);
 
   const fetchFilterCategory = type === 'foods'
     ? async () => setRecipes(await fetchFoodsFilterToCategory(categories))
     : async () => setRecipes(await fetchDrinksFilterToCategory(categories));
 
-  function checkbox(item, index) {
+  function buttons(item, index) {
     const { strCategory } = item;
     const id = Math.random(Number(type === 'foods' ? item.idMeal : item.idDrink));
     return (
@@ -39,7 +39,7 @@ function Categories(props) {
   useEffect(() => {
     if (categories !== '') {
       fetchFilterCategory(categories);
-    } else {
+    } else if (!redirect) {
       setRecipes(recipesAPI);
     }
   }, [categories]);
@@ -55,7 +55,7 @@ function Categories(props) {
         All
       </button>
       { categoriesAPI.slice(0, MAXCATEGORIES)
-        .map((item, index) => checkbox(item, index)) }
+        .map((item, index) => buttons(item, index)) }
     </div>
   );
 }
