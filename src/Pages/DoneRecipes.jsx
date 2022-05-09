@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import RecipesContext from '../Context/RecipesContext';
 import Header from '../Components/Header';
+import ListRecipesInStorege from '../Components/ListDoneRecipes';
 
 function DoneRecipes() {
   const { setTitle, setSearch } = useContext(RecipesContext);
@@ -10,7 +11,10 @@ function DoneRecipes() {
   }, []);
 
   return (
-    <Header />
+    <>
+      <Header />
+      <ListRecipesInStorege doneOrFavorite="Done" />
+    </>
   );
 }
 

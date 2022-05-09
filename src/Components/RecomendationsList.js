@@ -25,7 +25,7 @@ function Recommendations(props) {
 }
 
 Recommendations.propTypes = {
-  recommendation: PropTypes.arrayOf(PropTypes.node).isRequired,
+  recommendation: PropTypes.arrayOf(PropTypes.any).isRequired,
 };
 
 export default Recommendations;
