@@ -14,12 +14,6 @@ function CardRecipe(prop) {
         className="card"
         data-testid={ testid }
       >
-        <h3
-          className="title-card"
-          data-testid={ `${index}${testIdName}` }
-        >
-          { recipe[`str${type}`] }
-        </h3>
         <span>
           <img
             data-testid={ `${index}-card-img` }
@@ -27,6 +21,12 @@ function CardRecipe(prop) {
             alt={ recipe[`str${type}`] }
             className="cardImage"
           />
+          <h3
+            className="title-card"
+            data-testid={ `${index}${testIdName}` }
+          >
+            { recipe[`str${type}`] }
+          </h3>
         </span>
       </div>
     </Link>

@@ -11,7 +11,7 @@ body {
   font-size: 15px;
   font-style: italic;
   height: 30px;
-  margin: 3.2px;
+  /* margin: 4px; */
   margin-bottom: 20px;
   margin-top: 15px;
   outline: none;
@@ -20,4 +20,9 @@ body {
 
 button {
   border-radius: 10px;
+}
+
+.daddy-categories {
+  display: flex;
+  justify-content: space-around;
 }

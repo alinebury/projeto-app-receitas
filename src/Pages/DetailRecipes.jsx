@@ -94,22 +94,35 @@ function DetailRecipes(props) {
           <h3 data-testid="recipe-category">
             { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
           </h3>
-          <ul>
+          <h3>Ingredients</h3>
+          <ul className="background-detail">
             { ingredient.map((whatever, index) => (
               <li
                 key={ index }
+                className="text-detail text-ingredient"
                 data-testid={ `${index}-ingredient-name-and-measure` }
               >
                 {`${ingredient[index]} - ${recipe[0][`strMeasure${index + 1}`]}`}
               </li>
             )) }
           </ul>
-          <p data-testid="instructions">{ recipe[0].strInstructions }</p>
+          <h3>Instructions</h3>
+          <p
+            className="background-detail text-detail text-instructions"
+            data-testid="instructions"
+          >
+            { recipe[0].strInstructions }
+          </p>
           { isFood && (
-            <video data-testid="video" controls>
-              <source src={ recipe[0].strYoutube } type="video/mp4" />
-              <track kind="captions" />
-            </video>) }
+            <div className="video">
+              <video
+                data-testid="video"
+                controls
+              >
+                <source src={ recipe[0].strYoutube } type="video/mp4" />
+                <track kind="captions" />
+              </video>
+            </div>) }
           <Recommendations recommendation={ recommendation } />
           <button
             className="btnStartRecipe"

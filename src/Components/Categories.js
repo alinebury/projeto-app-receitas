@@ -45,7 +45,7 @@ function Categories(props) {
   }, [categories]);
 
   return (
-    <div>
+    <div className="daddy-categories">
       <button
         type="button"
         onClick={ () => setCategories('') }
