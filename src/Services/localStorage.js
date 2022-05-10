@@ -14,14 +14,12 @@ export function setStorageFavoriteRecipes(storage) {
   const prev = getStorageFavoriteRecipes();
   const newStorage = [...prev, storage];
   localStorage.setItem(FAVORITE_RECIPES, JSON.stringify(newStorage));
-  // return newStorage;
 }
 
 export function removeStorageFavoriteRecipes(storage) {
   const prev = getStorageFavoriteRecipes();
   const newStorage = prev.filter((item) => item.id !== storage.id);
   localStorage.setItem(FAVORITE_RECIPES, JSON.stringify(newStorage));
-  // return newStorage;
 }
 
 export function getStorageInProgressRecipes() {
@@ -72,6 +70,11 @@ export function setStorageUser(storage) {
   localStorage.setItem(USER, JSON.stringify(storage));
 }
 
+export function getStorageUser() {
+  const validate = localStorage.getItem(USER);
+  return validate ? JSON.parse(validate) : '';
+}
+
 export function getStorageDoneRecipes() {
   const validate = localStorage.getItem(DONE_RECIPES);
   return validate ? JSON.parse(validate) : [];
@@ -81,4 +84,8 @@ export function setStorageDoneRecipes(storage) {
   const prev = getStorageDoneRecipes();
   const newStorage = [...prev, storage];
   localStorage.setItem(DONE_RECIPES, JSON.stringify(newStorage));
+}
+
+export function clearStorage() {
+  localStorage.clear();
 }
