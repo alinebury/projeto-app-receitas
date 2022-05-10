@@ -1,4 +1,5 @@
 .recipesList {
+  background-color: black;
   display: flex;
   flex-wrap: wrap;
   margin-bottom: 50px;
