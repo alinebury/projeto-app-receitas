@@ -7,7 +7,6 @@ const NUMBER_SIX = 6;
 
 function Recommendations(props) {
   const { recommendation } = props;
-  // console.log(recommendation);
   return (
     <div className="carousel">
       {

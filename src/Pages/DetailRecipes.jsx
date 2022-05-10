@@ -49,7 +49,6 @@ function DetailRecipes(props) {
       Object.values(progressRecipe)
         .some((reci) => reci[id]) ? 'Continue Recipe' : 'Star Recipe',
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   useEffect(() => {

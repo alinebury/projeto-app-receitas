@@ -23,7 +23,6 @@ function ExploreNationalites() {
 
   useEffect(() => {
     if (nationalities.length === 0) return;
-    console.log(nationalities);
     fetchFood(nationalitie);
   }, [nationalities, nationalitie]);
 

@@ -36,7 +36,6 @@ function Search() {
         setRecipes(resultRecipes);
       } else {
         resultRecipes = await fetchDrinksRecipes(radioAPI);
-        console.log(resultRecipes);
         setRecipes(resultRecipes);
       }
       redirectResult(resultRecipes);
