@@ -73,55 +73,57 @@ function DetailRecipes(props) {
     <div>
       { recipe.length !== 0 && (
         <>
-          <img
-            width="100%"// mago do css resolva isso aq
-            data-testid="recipe-photo"
-            src={ objRecipe.image }
-            alt={ objRecipe.name }
-          />
-          <h2 data-testid="recipe-title">
-            { objRecipe.name }
-          </h2>
+          <div className="content-recipe">
+            <img
+              className="image-recipe"
+              data-testid="recipe-photo"
+              src={ objRecipe.image }
+              alt={ objRecipe.name }
+            />
+            <h2 data-testid="recipe-title">
+              { objRecipe.name }
+            </h2>
 
-          <ButtonsOfDetails
-            objRecipe={ objRecipe }
-            id={ id }
-            url={ url }
-          />
+            <ButtonsOfDetails
+              objRecipe={ objRecipe }
+              id={ id }
+              url={ url }
+            />
 
-          <h3 data-testid="recipe-category">
-            { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
-          </h3>
-          <h3>Ingredients</h3>
-          <ul className="background-detail">
-            { ingredient.map((item, index) => (
-              <li
-                key={ index }
-                className="text-detail text-ingredient"
-                data-testid={ `${index}-ingredient-name-and-measure` }
-              >
-                {`${item} - ${recipe[0][`strMeasure${index + 1}`]}`}
-              </li>
-            )) }
-          </ul>
-          <h3>Instructions</h3>
-          <p
-            className="background-detail text-detail text-instructions"
-            data-testid="instructions"
-          >
-            { recipe[0].strInstructions }
-          </p>
-          { isFood && (
-            <div className="video">
-              <video
-                data-testid="video"
-                controls
-              >
-                <source src={ recipe[0].strYoutube } type="video/mp4" />
-                <track kind="captions" />
-              </video>
-            </div>) }
-          <Recommendations recommendation={ recommendation } />
+            <h3 data-testid="recipe-category">
+              { isFood ? recipe[0].strCategory : recipe[0].strAlcoholic}
+            </h3>
+            <h3>Ingredients</h3>
+            <ul className="background-detail">
+              { ingredient.map((item, index) => (
+                <li
+                  key={ index }
+                  className="text-detail text-ingredient"
+                  data-testid={ `${index}-ingredient-name-and-measure` }
+                >
+                  {`${item} - ${recipe[0][`strMeasure${index + 1}`]}`}
+                </li>
+              )) }
+            </ul>
+            <h3>Instructions</h3>
+            <p
+              className="background-detail text-detail text-instructions"
+              data-testid="instructions"
+            >
+              { recipe[0].strInstructions }
+            </p>
+            { isFood && (
+              <div className="video">
+                <video
+                  data-testid="video"
+                  controls
+                >
+                  <source src={ recipe[0].strYoutube } type="video/mp4" />
+                  <track kind="captions" />
+                </video>
+              </div>) }
+            <Recommendations recommendation={ recommendation } />
+          </div>
           <button
             className="btnStartRecipe"
             type="button"

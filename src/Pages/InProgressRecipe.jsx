@@ -65,31 +65,42 @@ function InProgressRecipe(props) {
     <div>
       { (recipe.length !== 0 && recipeObj !== {}) && (
         <>
-          <img
-            width="100%"// mago do css resolva isso aq
-            data-testid="recipe-photo"
-            src={ recipeObj.image }
-            alt={ recipeObj.name }
-          />
-          <h2 data-testid="recipe-title">
-            { recipeObj.name }
-          </h2>
-          <ButtonsOfDetails
-            objRecipe={ recipeObj }
-            id={ id }
-            url={ url.replace('/in-progress', '') }
-          />
-          <h3 data-testid="recipe-category">
-            { isFood ? recipeObj.strCategory : recipeObj.strAlcoholic }
-          </h3>
-          { recipeObj !== {} && <Ingredients
-            id={ id }
-            itens={ ingredients }
-            recipe={ recipe[0] }
-            isFood={ isFood }
-            handleButton={ setCantFinish }
-          /> }
-          <p data-testid="instructions">{ recipe[0].strInstructions }</p>
+          <div className="content-recipe">
+            <img
+              className="image-recipe"
+              data-testid="recipe-photo"
+              src={ recipeObj.image }
+              alt={ recipeObj.name }
+            />
+            <h2 data-testid="recipe-title">
+              { recipeObj.name }
+            </h2>
+            <ButtonsOfDetails
+              objRecipe={ recipeObj }
+              id={ id }
+              url={ url.replace('/in-progress', '') }
+            />
+            <h3 data-testid="recipe-category">
+              { isFood ? recipeObj.strCategory : recipeObj.strAlcoholic }
+            </h3>
+            <h3>Ingredients</h3>
+            <div className="background-detail text-detail">
+              { recipeObj !== {} && <Ingredients
+                id={ id }
+                itens={ ingredients }
+                recipe={ recipe[0] }
+                isFood={ isFood }
+                handleButton={ setCantFinish }
+              /> }
+            </div>
+            <h3>Instructions</h3>
+            <p
+              className="background-detail text-detail text-instructions"
+              data-testid="instructions"
+            >
+              { recipe[0].strInstructions }
+            </p>
+          </div>
           <button
             className="btnStartRecipe"// mago do css resolva isso aq
             type="button"
