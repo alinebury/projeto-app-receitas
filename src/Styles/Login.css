@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comforter&family=Oleo+Script+Swash+Caps:wght@700&display=swap');
+
 .login-container {
   align-items: center;
-  background-image: url('../images/food-meal-vegetarian-vegan.jpg');
+  background-image: url('https://cdn.vox-cdn.com/thumbor/_LeBdKq-39PuwKIaTScYylZiteM=/0x0:5366x3577/1200x900/filters:focal(2053x1740:2911x2598)/cdn.vox-cdn.com/uploads/chorus_image/image/66549722/SkandiaShafer_Genghis-9373.0.7.jpeg');
   background-position: center;
   background-size: cover;
   display: flex;
@@ -22,11 +24,11 @@
 
 .title, .login-text {
   color: rgb(241, 241, 241);
-  font-family: Poppins , sans-serif;
-  font-size: 2rem;
 }
 
 .title {
+  font-family: 'Oleo Script Swash Caps', cursive;
+  font-size: 2rem;
   font-style: italic;
   position: absolute;
   top: 30px;
@@ -48,7 +50,7 @@
 }
 
 .input-login:focus {
-  border-bottom: 2px solid rgb(57, 156, 0);
+  border-bottom: 2px solid #0cf;
 }
 
 .input-login::placeholder, .text {
@@ -67,9 +69,9 @@
 }
 
 .enable {
-  border-bottom: 2px solid rgb(140, 243, 140);
-  color: rgb(140, 243, 140);
-  text-shadow: 0 0 2px green;
+  border-bottom: 2px solid #0cf;
+  color: #0cf;
+  text-shadow: 0 0 2px rgb(0, 102, 255);
 }
 
 .enable:hover {

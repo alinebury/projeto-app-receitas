@@ -3,18 +3,25 @@ body {
   color: white;
 }
 
+.selected {
+  background: linear-gradient(to right, rgb(7, 7, 7), #0cf);
+}
+
+.selectable {
+  background: linear-gradient(to right, #414345, #232526);
+}
+
 .btn-categories {
-  background: rgb(41, 41, 41);
   border: none;
   border-radius: 10px;
   color: white;
   font-size: 15px;
   font-style: italic;
-  height: 30px;
-  margin-bottom: 20px;
-  margin-top: 15px;
+  height: 40px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   outline: none;
-  padding: 4px 5px;
+  width: 110px;
 }
 
 button {
@@ -23,6 +30,7 @@ button {
 
 .daddy-categories {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 

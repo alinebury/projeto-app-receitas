@@ -10,6 +10,20 @@ function Header() {
   return (
     <header>
       <nav>
+        <Link to="/profile">
+          <img
+            className="profile-top"
+            data-testid="profile-top-btn"
+            src={ profileIcon }
+            alt="profile icon"
+          />
+        </Link>
+        <h2
+          className="foods-title"
+          data-testid="page-title"
+        >
+          { title }
+        </h2>
         { search && (
           <button
             type="button"
@@ -22,20 +36,6 @@ function Header() {
               alt="search icon"
             />
           </button>) }
-        <h2
-          className="foods-title"
-          data-testid="page-title"
-        >
-          { title }
-        </h2>
-        <Link to="/profile">
-          <img
-            className="profile-top"
-            data-testid="profile-top-btn"
-            src={ profileIcon }
-            alt="profile icon"
-          />
-        </Link>
       </nav>
     </header>
   );
