@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comforter&family=Oleo+Script+Swash+Caps:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Comforter&family=Oleo+Script+Swash+Caps:wght@700&display=swap') ;
 
 .login-container {
   align-items: center;
@@ -27,7 +27,7 @@
 }
 
 .title {
-  font-family: 'Oleo Script Swash Caps', cursive;
+  font-family: "Oleo Script Swash Caps" , cursive;
   font-size: 2rem;
   font-style: italic;
   position: absolute;
