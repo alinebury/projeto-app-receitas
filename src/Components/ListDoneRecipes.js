@@ -8,7 +8,6 @@ import CardHorizontalRecipe from './CardHorizontalRecipe';
 
 function ListRecipesInStorege() {
   const { title } = useContext(RecipesContext);
-  console.log(title.includes('Favorite'));
   const [doneRecipes, setDoneRecipes] = useState([]);
   const [renderRecipes, setRenderRecipes] = useState([]);
 

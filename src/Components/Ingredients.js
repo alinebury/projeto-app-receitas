@@ -47,7 +47,7 @@ function Ingredients(props) {
           htmlFor={ index }
           key={ index }
           data-testid={ `${index}-ingredient-step` }
-          className={ list[index] ? 'complete' : '' }
+          className={ list[index] ? 'complete text-ingredient' : 'text-ingredient' }
         >
           <input // mago do css resolva isso aq
             id={ index }

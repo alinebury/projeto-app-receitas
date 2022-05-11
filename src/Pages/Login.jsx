@@ -53,7 +53,6 @@ function Login() {
           onChange={ (e) => setPasswordInput(e.target.value) }
           className="input-login"
         />
-        {/* <Link to="/foods"> */}
         <button
           type="button"
           name="Entrar"
@@ -66,16 +65,9 @@ function Login() {
           Entrar
         </button>
         { !login && <Redirect to="/foods" /> }
-        {/* </Link> */}
       </div>
     </section>
   );
 }
-
-// Login.propTypes = {
-//   history: PropTypes.shape({
-//     push: PropTypes.func,
-//   }).isRequired,
-// };
 
 export default Login;

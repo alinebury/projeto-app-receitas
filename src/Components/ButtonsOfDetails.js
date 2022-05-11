@@ -55,7 +55,6 @@ function ButtonsOfDetails({ id, objRecipe, url }) {
 
 ButtonsOfDetails.propTypes = {
   id: PropTypes.string.isRequired,
-  // favoriteRecipes: PropTypes.arrayOf(PropTypes.any).isRequired,
   objRecipe: PropTypes.shape({}).isRequired,
   url: PropTypes.string.isRequired,
 };

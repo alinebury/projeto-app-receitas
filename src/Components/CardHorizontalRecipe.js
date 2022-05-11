@@ -10,7 +10,6 @@ import {
 
 function CardHorizontalRecipe(props) {
   const { recipe, index, doneOrFavorite, setRenderRecipes } = props;
-  console.log(recipe);
   const [isCopied, setIsCopied] = useState(false);
 
   const handleButtonShare = (type, id) => {
