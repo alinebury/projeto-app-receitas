@@ -22,7 +22,7 @@ function objOfRecipe(recipe, id, isFood) {
 
 function objOfDoneRecipe(objRecipe, recipe) {
   const date = new Date();
-  const doneDate = `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`;
+  const doneDate = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
   return {
     ...objRecipe,
     doneDate,
