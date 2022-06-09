@@ -48,14 +48,15 @@ function Categories(props) {
 
   return (
     <div className="daddy-categories">
-      <button
-        type="button"
-        onClick={ () => setCategories('') }
-        data-testid="All-category-filter"
-        className={ categories === '' ? selected : selectable }
-      >
-        All
-      </button>
+      { categoriesAPI && categoriesAPI.length > 0 && (
+        <button
+          type="button"
+          onClick={ () => setCategories('') }
+          data-testid="All-category-filter"
+          className={ categories === '' ? selected : selectable }
+        >
+          All
+        </button>)}
       { categoriesAPI.slice(0, MAXCATEGORIES)
         .map((item, index) => buttons(item, index)) }
     </div>
