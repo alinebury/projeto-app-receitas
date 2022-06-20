@@ -1,6 +1,6 @@
 # Projeto App de Receitas
 
-![App-de-receitas](/sd-019-b-project-recipes-app/video/app-receitas.mp4)
+![App-de-receitas](video/app-receitas.mp4)
 
 ### `npm install`
  Para instalar as depêncidas.
