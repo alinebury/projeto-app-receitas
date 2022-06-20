@@ -1,6 +1,6 @@
 # Projeto App de Receitas
 
-https://user-images.githubusercontent.com/94149084/174661001-f3eb6936-6bc5-4003-9b94-f6b27f97aae4.mp4
+https://user-images.githubusercontent.com/94149084/174661410-7550100a-2b96-4874-8491-15ea8c62e5c5.mp4
 
 ### `npm install`
  Para instalar as depêncidas.
